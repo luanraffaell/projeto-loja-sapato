@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -29,5 +30,12 @@ public class UsuarioService {
             throw new NegocioException("Já existe um usuario cadastrado com o email:"+usuario.getEmail());
         }
         return this.usuarioRepository.save(usuario);
+    }
+    public List<Usuario> listarUsuarios(){
+        return this.usuarioRepository.findAll();
+    }
+    public Usuario buscarOuFalhar(Long id){
+        return this.usuarioRepository.findById(id)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Usuario com o id "+id+" não foi encontrado!"));
     }
 }
