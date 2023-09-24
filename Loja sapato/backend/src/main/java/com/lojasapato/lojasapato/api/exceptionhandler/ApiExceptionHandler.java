@@ -1,5 +1,6 @@
 package com.lojasapato.lojasapato.api.exceptionhandler;
 
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.PropertyBindingException;
 import com.lojasapato.lojasapato.domain.exception.EntidadeEmUsoException;
@@ -34,17 +35,15 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-        Throwable rootCause = ex;
-		rootCause = ex.getCause();
-        if (rootCause instanceof InvalidFormatException) {
-            return handleInvalidFormatException((InvalidFormatException) rootCause, headers, (HttpStatus) status, request);
-        } else if (rootCause instanceof PropertyBindingException) {
-            return handlePropertyBindingException((PropertyBindingException) rootCause, headers, (HttpStatus)status, request);
+        if (ex.getCause() instanceof InvalidFormatException) {
+            return handleInvalidFormatException((InvalidFormatException) ex.getCause(), headers, (HttpStatus) status, request);
+        } else if (ex.getCause() instanceof PropertyBindingException) {
+            return handlePropertyBindingException((PropertyBindingException) ex.getCause(), headers, (HttpStatus)status, request);
         }
 
         ProblemType problemType = ProblemType.MENSAGEM_INCOMPREENSIVEL;
         String detail = "O corpo da requisição está invalido. Verifique erro de sintaxe.";
-        Problem problem = createProblemBuilder((HttpStatus)status, problemType, detail).build();
+        Problem problem = createProblemBuilder(status, problemType, detail).build();
 
         return handleExceptionInternal(ex, problem, headers, status, request);
     }
@@ -67,7 +66,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         ProblemType problemType = ProblemType.DADOS_INVALIDOS;
         Problem problem = createProblemBuilder(status, problemType, detail).fields(problemFields).build();
 
-        return handleExceptionInternal(ex, problem, headers, (HttpStatus) status, request);
+        return handleExceptionInternal(ex, problem, headers, status, request);
     }
 
     @Override
@@ -106,7 +105,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<Object> handlePropertyBindingException(PropertyBindingException ex, HttpHeaders headers,
                                                                   HttpStatus status, WebRequest request) {
         ProblemType problemType = ProblemType.MENSAGEM_INCOMPREENSIVEL;
-        String path = ex.getPath().stream().map(ref -> ref.getFieldName()).collect(Collectors.joining("."));
+        String path = ex.getPath().stream().map(JsonMappingException.Reference::getFieldName).collect(Collectors.joining("."));
         String details = String.format(
                 "A propriedade '%s' não existe. " + "Corrija ou remova essa propriedade e tente novamente.", path);
         Problem problem = createProblemBuilder(status, problemType, details).build();
@@ -117,7 +116,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<Object> handleInvalidFormatException(InvalidFormatException ex, HttpHeaders headers,
                                                                 HttpStatus status, WebRequest request) {
         ProblemType problemType = ProblemType.MENSAGEM_INCOMPREENSIVEL;
-        String path = ex.getPath().stream().map(ref -> ref.getFieldName()).collect(Collectors.joining("."));
+        String path = ex.getPath().stream().map(JsonMappingException.Reference::getFieldName).collect(Collectors.joining("."));
         String detail = String.format(
                 "A propriedade '%s' recebeu o valor '%s', que é de um tipo inválido"
                         + ". Corrija e informe um valor compatível com o tipo '%s'.",
@@ -153,15 +152,6 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, problem, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
-    // método já tratado pelo ResponseEntityExceptionHandler
-//	@ExceptionHandler(HttpMediaTypeNotSupportedException.class)
-//	public ResponseEntity<?> tratarHttpMediTypeSupportedException(){
-//		Problema problema = Problema.builder()
-//				.dataHora(LocalDateTime.now())
-//				.mensagem("O tipo de midia não é suportado!").build();
-//
-//		return ResponseEntity.status(HttpStatus.UNSUPPORTED_MEDIA_TYPE).body(problema);
-//	}
     @ExceptionHandler(EntidadeEmUsoException.class)
     public ResponseEntity<?> handleEntidadeEmUsoException(EntidadeEmUsoException ex, WebRequest request) {
         HttpStatus status = HttpStatus.CONFLICT;
