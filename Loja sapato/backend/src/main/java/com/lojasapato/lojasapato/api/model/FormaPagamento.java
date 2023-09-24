@@ -1,15 +1,13 @@
 package com.lojasapato.lojasapato.api.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Table(name = "tb_forma_pagamento")
 public class FormaPagamento {
     @EqualsAndHashCode.Include
     @Id
