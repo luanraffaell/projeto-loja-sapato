@@ -28,6 +28,6 @@ public class UsuarioService {
         if(usuarioAtual.isPresent()){
             throw new NegocioException("Já existe um usuario cadastrado com o email:"+usuario.getEmail());
         }
-        return this.usuarioRepository.save(usuarioAtual.get());
+        return this.usuarioRepository.save(usuario);
     }
 }
