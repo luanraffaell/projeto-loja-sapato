@@ -19,7 +19,6 @@ public class Pedido {
     private Long id;
 
     private BigDecimal subtotal;
-    private BigDecimal taxaFrete;
     private BigDecimal valorTotal;
     @Enumerated(EnumType.STRING)
     private StatusPedido statusPedido;
@@ -31,5 +30,14 @@ public class Pedido {
     @ManyToOne
     @JoinColumn(name = "usuario_funcionario_id")
     private Usuario funcionario;
+
+    public void calcularValorTotal(){
+        this.getItens().forEach(ItemPedido::calcularPrecoTotal);
+        this.subtotal = this.getItens()
+                .stream()
+                .map(item -> item.getPrecoTotal())
+                .reduce(BigDecimal.ZERO,BigDecimal::add);
+        this.valorTotal = subtotal;
+    }
 
 }
