@@ -4,6 +4,7 @@ import com.lojasapato.lojasapato.domain.exception.EntidadeNaoEncontradaException
 import com.lojasapato.lojasapato.domain.exception.NegocioException;
 import com.lojasapato.lojasapato.domain.model.Usuario;
 import com.lojasapato.lojasapato.infrastructure.repositories.UsuarioRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ public class UsuarioService {
         }
         return usuarioAtual.get();
     }
-
+    @Transactional
     public Usuario criarUsuario(Usuario usuario){
         Optional<Usuario> usuarioAtual = this.usuarioRepository.findUsuarioByEmail(usuario.getEmail());
         if(usuarioAtual.isPresent()){
