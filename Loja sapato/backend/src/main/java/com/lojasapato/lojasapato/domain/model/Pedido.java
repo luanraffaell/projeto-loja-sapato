@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -21,6 +23,8 @@ public class Pedido {
     private BigDecimal valorTotal;
     @Enumerated(EnumType.STRING)
     private StatusPedido statusPedido;
+    @OneToMany(mappedBy = "id.pedido", cascade = CascadeType.ALL)
+    private List<ItemPedido> itens = new ArrayList<>();
     @ManyToOne
     @JoinColumn(name = "usuario_funcionario_id")
     private Usuario funcionario;
