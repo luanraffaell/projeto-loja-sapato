@@ -23,6 +23,9 @@ public class Pedido {
     private BigDecimal valorTotal;
     @Enumerated(EnumType.STRING)
     private StatusPedido statusPedido;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false)
+    private FormaPagamento formaPagamento;
     @OneToMany(mappedBy = "id.pedido", cascade = CascadeType.ALL)
     private List<ItemPedido> itens = new ArrayList<>();
     @ManyToOne
