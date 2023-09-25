@@ -1,11 +1,16 @@
 package com.lojasapato.lojasapato.domain.service;
 
+import com.lojasapato.lojasapato.api.model.PedidoRequestDTO;
+import com.lojasapato.lojasapato.api.model.PedidoResponseDTO;
 import com.lojasapato.lojasapato.domain.exception.EntidadeNaoEncontradaException;
 import com.lojasapato.lojasapato.domain.model.*;
 import com.lojasapato.lojasapato.infrastructure.repositories.PedidoRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -16,29 +21,36 @@ public class EmitirPedido {
     private final PedidoRepository pedidoRepository;
 
     @Transactional
-    public Pedido emitirPedido(Pedido pedido){
-        validarPedido(pedido);
-        validarItens(pedido);
+    public PedidoResponseDTO emitirPedido(PedidoRequestDTO pedidoDTO){
+        Pedido pedido = converterEValidarPedidoDTO(pedidoDTO);
         pedido.calcularValorTotal();
         pedido.setStatusPedido(StatusPedido.CRIADO);
-        return pedidoRepository.save(pedido);
+        return new PedidoResponseDTO(pedidoRepository.save(pedido));
     }
 
-    private void validarPedido(Pedido pedido) {
-        Usuario funcionario = this.usuarioService.buscarOuFalhar(pedido.getFuncionario().getId());
+    private Pedido converterEValidarPedidoDTO(PedidoRequestDTO pedidoDTO) {
+        Pedido pedido = new Pedido();
+        Usuario funcionario = this.usuarioService.buscarOuFalhar(pedidoDTO.getVendedorId());
         FormaPagamento formaPagamento =
-                this.formaPagamentoService.buscarFormaPagamentoPorId(pedido.getFormaPagamento().getId());
+                this.formaPagamentoService.buscarFormaPagamentoPorId(pedidoDTO.getFormaPagamentoId());
         pedido.setFuncionario(funcionario);
         pedido.setFormaPagamento(formaPagamento);
+        pedido.setItens(this.validarItens(pedidoDTO,pedido));
+        return pedido;
     }
 
-    private void validarItens(Pedido pedido) {
-        pedido.getItens().forEach(item -> {
-            Produto produto = this.produtoService.buscarProdutoPorId(item.getId().getProduto().getId());
-            item.getId().setPedido(pedido);
-            item.getId().setProduto(produto);
-            item.setPrecoUnitario(produto.getPreco());
+    private List<ItemPedido> validarItens(PedidoRequestDTO pedidoDTO, Pedido pedido) {
+        List<ItemPedido> listaDeItens = new ArrayList<>();
+        pedidoDTO.getItens().forEach(item -> {
+            Produto produto = this.produtoService.buscarProdutoPorId(item.getId());
+            ItemPedido itemPedido = new ItemPedido();
+            itemPedido.getId().setPedido(pedido);
+            itemPedido.getId().setProduto(produto);
+            itemPedido.setPrecoUnitario(produto.getPreco());
+            itemPedido.setQuantidade(item.getQuantidade());
+            listaDeItens.add(itemPedido);
         });
+        return listaDeItens;
     }
 
 
