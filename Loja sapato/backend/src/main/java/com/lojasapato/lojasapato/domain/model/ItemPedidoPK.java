@@ -1,5 +1,6 @@
 package com.lojasapato.lojasapato.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -12,6 +13,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Embeddable
 public class ItemPedidoPK implements Serializable {
+   @JsonIgnore
     @EqualsAndHashCode.Include
     @ManyToOne
     @JoinColumn(name = "pedido_id")
