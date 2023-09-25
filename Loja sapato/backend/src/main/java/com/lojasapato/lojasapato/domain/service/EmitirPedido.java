@@ -1,10 +1,7 @@
 package com.lojasapato.lojasapato.domain.service;
 
 import com.lojasapato.lojasapato.domain.exception.EntidadeNaoEncontradaException;
-import com.lojasapato.lojasapato.domain.model.FormaPagamento;
-import com.lojasapato.lojasapato.domain.model.Pedido;
-import com.lojasapato.lojasapato.domain.model.Produto;
-import com.lojasapato.lojasapato.domain.model.Usuario;
+import com.lojasapato.lojasapato.domain.model.*;
 import com.lojasapato.lojasapato.infrastructure.repositories.PedidoRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -23,6 +20,7 @@ public class EmitirPedido {
         validarPedido(pedido);
         validarItens(pedido);
         pedido.calcularValorTotal();
+        pedido.setStatusPedido(StatusPedido.CRIADO);
         return pedidoRepository.save(pedido);
     }
 
