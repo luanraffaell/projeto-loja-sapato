@@ -1,6 +1,7 @@
 package com.lojasapato.lojasapato.domain.service;
 
 import com.lojasapato.lojasapato.api.model.PedidoResponseDTO;
+import com.lojasapato.lojasapato.domain.exception.EntidadeNaoEncontradaException;
 import com.lojasapato.lojasapato.domain.model.Pedido;
 import com.lojasapato.lojasapato.infrastructure.repositories.PedidoRepository;
 import lombok.AllArgsConstructor;
@@ -19,5 +20,12 @@ public class PedidoService {
                 .stream()
                 .map(pedido -> new PedidoResponseDTO(pedido))
                 .collect(Collectors.toList());
+    }
+    public PedidoResponseDTO buscarOuFalhar(Long id) {
+        Pedido pedido = pedidoRepository.findById(id)
+                .orElseThrow(() ->
+                        new EntidadeNaoEncontradaException("Não foi encontrado um pedido com id:" + id));
+        return new PedidoResponseDTO(pedido);
+
     }
 }
