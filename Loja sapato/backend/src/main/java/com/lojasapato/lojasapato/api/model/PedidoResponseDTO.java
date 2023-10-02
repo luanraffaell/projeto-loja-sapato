@@ -1,7 +1,6 @@
 package com.lojasapato.lojasapato.api.model;
 
 import com.lojasapato.lojasapato.domain.model.*;
-import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -15,7 +14,7 @@ public class PedidoResponseDTO {
     private String statusPedido;
     private String formaPagamento;
     private List<ItemDTO> itens = new ArrayList<>();
-    private UsuarioResponseDTO funcionario;
+    private UsuarioDTO funcionario;
 
     public PedidoResponseDTO(Pedido pedido) {
         this.id = pedido.getId();
@@ -23,6 +22,6 @@ public class PedidoResponseDTO {
         this.statusPedido = pedido.getStatusPedido().name();
         this.formaPagamento = pedido.getFormaPagamento().getDescricao();
         pedido.getItens().forEach(item -> itens.add(new ItemDTO(item)));
-        this.funcionario = new UsuarioResponseDTO(pedido.getFuncionario());
+        this.funcionario = new UsuarioDTO(pedido.getFuncionario());
     }
 }
