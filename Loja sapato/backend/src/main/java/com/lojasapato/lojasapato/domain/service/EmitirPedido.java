@@ -7,8 +7,10 @@ import com.lojasapato.lojasapato.domain.model.*;
 import com.lojasapato.lojasapato.infrastructure.repositories.PedidoRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,12 +24,22 @@ public class EmitirPedido {
 
     @Transactional
     public PedidoResponseDTO emitirPedido(PedidoRequestDTO pedidoDTO){
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Usuario usuario = this.usuarioService.findUsuarioByEmail(email);
+        pedidoDTO.setVendedorId(usuario.getId());
         Pedido pedido = converterEValidarPedidoDTO(pedidoDTO);
         pedido.calcularValorTotal();
         pedido.setStatusPedido(StatusPedido.CRIADO);
+        pedido = pedidoRepository.save(pedido);
+        pedido.setProtocolo(this.gerarProtocolo(pedido.getId()));
         return new PedidoResponseDTO(pedidoRepository.save(pedido));
     }
-
+    private String gerarProtocolo(Long idProduto){
+        String ano = String.valueOf(LocalDateTime.now().getYear());
+        String mes = String.valueOf(LocalDateTime.now().getMonth().getValue());
+        String id = String.valueOf(idProduto);
+        return ano+mes+"00"+id;
+    }
     private Pedido converterEValidarPedidoDTO(PedidoRequestDTO pedidoDTO) {
         Pedido pedido = new Pedido();
         Usuario funcionario = this.usuarioService.buscarOuFalhar(pedidoDTO.getVendedorId());

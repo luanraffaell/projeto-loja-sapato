@@ -2,8 +2,10 @@ package com.lojasapato.lojasapato.domain.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +34,9 @@ public class Pedido {
     @ManyToOne
     @JoinColumn(name = "usuario_funcionario_id")
     private Usuario funcionario;
+    @CreationTimestamp
+    private LocalDateTime dataCriacao;
+    private String protocolo;
 
     public void calcularValorTotal(){
         this.getItens().forEach(ItemPedido::calcularPrecoTotal);

@@ -16,6 +16,7 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    @Lob
     private String descricao;
     private BigDecimal preco;
     private Boolean ativo;

@@ -31,4 +31,8 @@ public class ProdutoService {
     public Produto cadastrarProduto(Produto produto){
         return this.produtoRepository.save(produto);
     }
+    @Transactional
+    public void removerProdutoPorId(Long id){
+        this.produtoRepository.deleteById(id);
+    }
 }

@@ -1,23 +1,22 @@
 package com.lojasapato.lojasapato.api.controller;
 
+import com.lojasapato.lojasapato.api.model.AuthenticationResponse;
 import com.lojasapato.lojasapato.api.model.LoginDTO;
 import com.lojasapato.lojasapato.api.model.UsuarioDTO;
 import com.lojasapato.lojasapato.domain.service.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("auth")
+@CrossOrigin
+@RequestMapping("/auth")
 public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody LoginDTO auth){
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody LoginDTO auth){
         return ResponseEntity.ok().body(authService.authenticate(auth));
     }
     @PostMapping("/register")

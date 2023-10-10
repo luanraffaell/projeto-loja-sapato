@@ -11,15 +11,18 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public Usuario findUsuarioByEmail(String email){
         Optional<Usuario> usuarioAtual = this.usuarioRepository.findUsuarioByEmail(email);
@@ -27,6 +30,10 @@ public class UsuarioService {
             throw new EntidadeNaoEncontradaException("Não foi encontrado um usuário com o email:"+email);
         }
         return usuarioAtual.get();
+    }
+    public List<UsuarioDTO> listarUsuariosDTO(){
+        return this.listarUsuarios().stream()
+                .map(usr -> new UsuarioDTO(usr)).collect(Collectors.toList());
     }
     @Transactional
     public UsuarioDTO criarUsuario(UsuarioDTO usuario){
@@ -53,11 +60,27 @@ public class UsuarioService {
         return this.usuarioRepository.findById(id)
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Usuario com o id "+id+" não foi encontrado!"));
     }
+    public UsuarioDTO buscarUsuarioDTO(Long id){
+        Usuario usuarioAtual = this.buscarOuFalhar(id);
+        return new UsuarioDTO(usuarioAtual);
+    }
+    public UsuarioDTO atualizarUsuario(Long id, UsuarioDTO usuarioDTO){
+        Usuario usuarioAtual = this.buscarOuFalhar(id);
+        usuarioDTO.setSenha("00");
+        Usuario usuario = this.dtoToModel(usuarioDTO);
+        usuario.setId(usuarioAtual.getId());
+        usuario.setSenha(usuarioAtual.getSenha());
+        return new UsuarioDTO(this.usuarioRepository.save(usuario));
+    }
+    @Transactional
+    public void deletarUsuarioPorId(Long id){
+        this.usuarioRepository.deleteById(id);
+    }
     private Usuario dtoToModel(UsuarioDTO usuario){
         Usuario usuarioNovo = new Usuario();
         usuarioNovo.setNome(usuario.getNome());
         usuarioNovo.setEmail(usuario.getEmail());
-        usuarioNovo.setSenha(usuario.getSenha());
+        usuarioNovo.setSenha(this.passwordEncoder.encode(usuario.getSenha()));
         usuarioNovo.setTipoUsuario(TipoUsuario.valueOf(usuario.getTipoUsuario()));
         usuarioNovo.setCpf(usuario.getCpf());
         return usuarioNovo;
