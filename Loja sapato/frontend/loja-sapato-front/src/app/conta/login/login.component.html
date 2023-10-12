@@ -1,0 +1,46 @@
+   <div class="container-bd">
+        <div class="container">
+            <div class="forms">
+                <div class="form login">
+                    <div class="alert alert-danger" *ngIf="errors.length > 0">
+                        <br>
+                        <h5 id="msgRetorno">Opa! Alguma coisa não deu certo:</h5>
+                        <ul>
+                            <li *ngFor="let error of errors">{{error}}</li>
+                        </ul>
+                    </div>
+                    <span class="title">Login</span>
+
+                    <form [formGroup]="registrationForm" (ngSubmit)="login()"> 
+                        <div class="input-field input-login">
+                            <input type="text" placeholder="Insira seu email" formControlName="email" required>
+                            <i class="fa-solid fa-envelope icon"></i>
+                        </div>
+                        <div class="input-field input-login">
+                            <input [type]="fieldTextType ? 'text' : 'password'" placeholder="Insira sua senha" formControlName="senha" required>
+                            <i class="fa-solid fa-lock icon"></i>
+                            <i
+                            class="fa-solid showHidePw"
+                            [ngClass]="{
+                              'fa-eye-slash': !fieldTextType,
+                              'fa-eye': fieldTextType
+                            }"
+                            (click)="toggleFieldTextType()"
+                          ></i>
+                        </div>
+                        <div class="checkbox-text">
+                            <div class="checkbox-content">
+                                <input type="checkbox" id="logCheck">
+                                <label for="logCheck" class="text">Lembre-me</label>
+                            </div>
+
+                            <a href="#" class="text">Esqueçeu a senha?</a>
+                        </div>
+                        <div class="input-field button">
+                            <input type="submit" value="Login" [disabled]="!registrationForm.valid">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

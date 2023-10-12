@@ -1,0 +1,78 @@
+
+<div class="container-bd">
+    <div class="container">
+        <div class="forms">
+            <a [routerLink]="['/admin/usuarios']" ><i class="fa-solid fa-backward icon back" data-bs-toggle="tooltip" data-bs-placement="top" title="Voltar"></i>
+            </a>
+            <div class="form login">
+                
+                <div class="alert alert-danger" *ngIf="errors.length > 0">
+                    <br>
+                    <h5 id="msgRetorno">Opa! Alguma coisa não deu certo:</h5>
+                    <ul>
+                        <li *ngFor="let error of errors">{{error}}</li>
+                    </ul>
+                </div>
+
+                <span class="title">Cadastro de usuário</span>                
+                <form novalidate [formGroup]="cadastroForm" (ngSubmit)="adicionarConta()">
+
+                    <div class="input-field" [ngClass]="{'input-invalid': isInputInvalid('nome'),'input-valid': isInputValid('nome')}">
+                        <input type="text" placeholder="Insira o nome" formControlName="nome"/>
+                <span class="text-danger" *ngIf="isInputInvalid('nome')">
+                    <p>Preencha o campo nome</p>
+                </span>
+                        <i class="fa-solid fa-user icon"></i>
+                        
+                    </div>
+                    <div class="input-field"  [ngClass]="{'input-invalid': isInputInvalid('email'),'input-valid': isInputValid('email')}">
+                        <input type="text" placeholder="Insira o email" formControlName="email" />
+                        <span class="text-danger" *ngIf="cadastroForm.get('email')?.errors && (cadastroForm.get('email')?.touched || cadastroForm.get('email')?.dirty)">
+                            <p>Preencha com um email valido</p>
+                        </span>
+                        <i class="fa-solid fa-envelope icon"></i>   
+                    </div>
+                   
+                    <div class="input-field"  [ngClass]="{'input-invalid': isInputInvalid('tipoUsuario'),'input-valid': isInputValid('tipoUsuario')}">
+                        <select  formControlName="tipoUsuario">
+                            <option value="ADMIN" selected>ADMINISTRADOR</option>
+                            <option value="VENDEDOR">VENDEDOR</option>
+                        </select>
+                        <span class="text-danger" *ngIf="isInputInvalid('tipoUsuario')">
+                            <p>Preencha o campo tipo usuario</p>
+                        </span>
+                        <i class="fa-solid fa-id-card icon"></i>
+                    </div>
+                    <div class="input-field"  [ngClass]="{'input-invalid': isInputInvalid('cpf'),'input-valid': isInputValid('cpf')}">
+                        <input type="text" placeholder="Insira o cpf" formControlName="cpf" />
+                        <span class="text-danger" *ngIf="isInputInvalid('cpf')">
+                            <p>Preencha o campo cpf</p>
+                        </span>
+                        <i class="fa-solid fa-shield-halved icon"></i>
+                    </div>
+                    <div class="input-field"  [ngClass]="{'input-invalid': isInputInvalid('senha'),'input-valid': isInputValid('senha')}">
+                        <input [type]="fieldTextType ? 'text' : 'password'" placeholder="Insira a senha" formControlName="senha" />
+                        <span class="text-danger" *ngIf="isInputInvalid('senha')">
+                            <p>Insira no minimo 5 caracteres</p>
+                        </span>
+                        <i class="fa-solid fa-lock icon"></i>
+                        <i
+                            class="fa-solid showHidePw"
+                            [ngClass]="{
+                              'fa-eye-slash': !fieldTextType,
+                              'fa-eye': fieldTextType
+                            }"
+                            (click)="toggleFieldTextType()"
+                          ></i>
+                    </div>
+                   
+                    <div class="input-field button">
+                            <input type="submit" [disabled]="!cadastroForm.valid" value="Cadastro">
+                        </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>
+

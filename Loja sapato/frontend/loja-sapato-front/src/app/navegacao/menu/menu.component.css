@@ -1,0 +1,57 @@
+.contact-info {
+    font-size: 1rem; /* Use 'rem' para tamanhos de fonte */
+}
+
+.a-link-contato {
+    margin-right: 1rem; /* Use 'rem' para margens */
+}
+
+.nav-link {
+    font-size: 1.5rem; /* Use 'rem' para tamanhos de fonte */
+    font-weight: 500;
+    color: #212934 !important;
+}
+
+.nav-link:hover {
+    color: green !important;
+}
+
+.nav-items {
+    margin-right: 1rem; /* Use 'rem' para margens */
+    padding: 0.5rem; /* Use 'rem' para preenchimento */
+}
+
+.nav-icon {
+    margin-right: 1.5rem; /* Use 'rem' para margens */
+}
+
+.cart {
+    top: -0.2rem; /* Use 'rem' para posicionamento */
+    right: 1rem; /* Use 'rem' para posicionamento */
+    padding: 0px 0.3rem; /* Use 'rem' para preenchimento */
+    font-size: small;
+    background-color: rgb(221, 221, 221);
+}
+
+.custom-icons {
+    left: 10%; /* Use porcentagens para posicionamento responsivo */
+}
+
+.navbar {
+    font-size: 1rem; /* Use 'rem' para tamanhos de fonte responsivos */
+  }
+  
+  .nav-link {
+    font-size: 1rem; /* Use 'rem' para tamanhos de fonte responsivos */
+  }
+  
+  @media (max-width: 768px) {
+    /* Ajuste os estilos para telas menores (ou outros tamanhos) conforme necessário */
+    .navbar {
+      font-size: 0.8rem; /* Reduza o tamanho da fonte para telas menores */
+    }
+    .nav-link {
+      font-size: 0.8rem; /* Reduza o tamanho da fonte para telas menores */
+    }
+  }
+  

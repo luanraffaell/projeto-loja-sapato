@@ -1,0 +1,12 @@
+@import 'ngx-toastr/toastr';
+html, body { height: 100vh;}
+
+@media (max-width: 768px) {
+    body {
+      font-size: 14px;
+    }
+  }
+ 
+  
+  
+  

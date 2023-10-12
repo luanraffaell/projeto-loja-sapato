@@ -1,0 +1,25 @@
+
+ <div class="container-fluid" style="margin-top: 7%;">
+  <!-- Botão Voltar -->
+  
+  <h1 class="d-flex justify-content-between align-items-center">
+    Detalhes do Usuário
+    <div class="col-sm-6">
+      <a [routerLink]="['/admin/usuarios']" class="btn btn-success back"><i class="fas fa-arrow-circle-left"></i>  Voltar</a>
+    </div>
+  </h1>
+  </div>
+  <!-- Informações do Usuário -->
+  <div class="card">
+      <div class="card-body">
+          <h5 class="card-title">Informações do Usuário</h5>
+          <ul class="list-group">
+              <li class="list-group-item"><strong>ID:</strong> {{ usuario.id }}</li>
+              <li class="list-group-item"><strong>Nome:</strong> {{ usuario.nome }}</li>
+              <li class="list-group-item"><strong>Email:</strong> {{ usuario.email }}</li>
+              <li class="list-group-item"><strong>CPF:</strong> {{ usuario.cpf }}</li>
+              <li class="list-group-item"><strong>Perfil:</strong> {{ usuario.tipoUsuario }}</li>
+          </ul>
+      </div>
+  </div>
+

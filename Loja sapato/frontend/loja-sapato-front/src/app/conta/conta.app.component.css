@@ -1,0 +1,129 @@
+/*https://www.youtube.com/watch?v=VP0DS6iXbXY&ab_channel=CodingLab*/
+
+.container-bd{
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+    min-height: 100%;
+    flex-direction: column;
+    justify-content: center;
+}
+.container{
+    position: relative;
+    max-width: 430px;
+    width: 100%;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+.container .form{
+    padding: 30px;
+}
+.container .form .title{
+    position: relative;
+    font-size: 27px;
+    font-weight: 600;
+}
+
+.form .title::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 30px;
+    background-color: #198754;
+    border-radius: 25px;
+}
+
+.form .input-field{
+    position: relative;
+    height: 50px;
+    width: 100%;
+    margin-top: 30px;
+}
+.input-field input{
+    height: 100%;
+    width: 100%;
+    padding: 0 35px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    border-bottom: 2px solid #ccc;
+    border-top: 2px solid transparent;
+}
+.input-field i{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 23px;
+}
+.input-login input:is(:focus, :valid){
+    border-bottom:2.5px solid #198754;
+    
+}
+
+.input-login input:is(:focus, :valid) ~ i{
+    color: #198754;
+    transition: all 0.2s ease;
+}
+
+.input-valid input:is(:focus, :valid){
+    border-bottom:2.5px solid #198754;
+    
+}
+
+.input-valid input:is(:focus, :valid) ~ i{
+    color: #198754;
+    transition: all 0.2s ease;
+}
+.input-invalid input:is(:focus, :valid){
+    border-bottom:2.5px solid #b90000;
+    
+}
+
+.input-invalid input:is(:focus, :valid) ~ i{
+    color: #b90000;
+    transition: all 0.2s ease;
+}
+
+
+
+.input-field i.icon{
+    left: 0;
+}
+.input-field i.showHidePw{
+    right: 0;
+}
+
+.form .checkbox-text{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.checkbox-text .checkbox-content{
+    display: flex;
+    align-items: center;
+}
+.checkbox-content input{
+    margin: 0 8px -2px 4px;
+    accent-color: #198754;
+}
+.form .text{
+    color: #333;
+    font-size: 14px;
+}
+.form a.text{
+    color: #198754;
+    font-size: 14px;
+}
+.form a{
+    text-decoration: none;
+}
+.form a:hover{
+    text-decoration: underline;
+}
+.meu-footer {
+    min-height: calc(100vh - 100px);
+}

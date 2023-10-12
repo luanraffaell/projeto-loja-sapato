@@ -1,0 +1,30 @@
+<!-- <div>
+              
+              <i class="fa-solid fa-user nav-icon text-light"></i>   
+              <a href="" class="navbar-sm-brand text-white text-decoration-none contact-info a-link-contato" > luanraffaell@hotmail.com</a>
+            </div>
+              <a [routerLink]="['/conta/login']" title="Login" class="text-white icones-menu"><i class="fa-solid fa-right-to-bracket text-light"></i>
+              </a>-->
+   
+    <div class="w-100 d-flex justify-content-between" [ngSwitch]="usuarioLogado()">
+        <div *ngSwitchCase="false">
+            <i class="fa-solid fa-shop nav-icon text-light"></i>
+            <a href="" class="navbar-sm-brand text-white text-decoration-none contact-info a-link-contato">
+             lojas@sapato.com   </a>
+        </div>
+        <a *ngSwitchCase="false" [routerLink]="['/conta/login']" title="Login" class="text-white icones-menu text-decoration-none">Login <i
+                class="fa-solid fa-right-to-bracket text-light"></i>
+        </a>
+
+        <div *ngSwitchCase="true">
+            <i class="fa-solid fa-user nav-icon text-light"></i>
+            <a href="" class="navbar-sm-brand text-white text-decoration-none contact-info a-link-contato">
+               {{ email }}</a>
+        </div>
+        <a *ngSwitchCase="true" [routerLink]="['/conta/login']"
+         href="javascript:void(0)" title="Login" (click)="logout()" class="text-white icones-menu
+         text-decoration-none ">Logout <i
+                class="fa-solid fa-right-to-bracket text-light"></i>
+        </a>
+           
+    </div>

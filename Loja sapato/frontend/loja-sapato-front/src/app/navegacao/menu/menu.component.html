@@ -1,0 +1,46 @@
+  <div class="fixed-top">
+    <div>
+      <nav class="navbar navbar-expand-lg bg-dark">
+        <div class="container main-container">
+          <app-menu-component style="width: 100%;"></app-menu-component>
+        </div>
+      </nav>
+      
+    </div>
+
+    <!--main nav start-->
+
+    <nav class="navbar navbar-expand-md bg-body-tertiary">
+      <div class="container d-flex justify-content-between align-items-center">
+        <h1 class="text-success">It's Code</h1>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/home']">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/vendas']">Produtos</a>
+            </li> 
+            <li class="nav-item">
+              <a class="nav-link"[routerLink]="['vendas/pedidos']">Pedidos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Sobre</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/admin']">Admin</a>
+            </li>
+            
+          </ul>     
+          
+        </div>   
+       <app-carrinho></app-carrinho>        
+
+      </div>
+      
+    </nav>
+    <!--main nav end-->
+    

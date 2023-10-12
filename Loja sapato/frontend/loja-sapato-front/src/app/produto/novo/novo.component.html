@@ -1,0 +1,64 @@
+
+<div class="container-bd">
+    <div class="container">
+        <div class="forms">
+            <a [routerLink]="['/admin/produtos']" ><i class="fa-solid fa-backward icon back" data-bs-toggle="tooltip" data-bs-placement="top" title="Voltar"></i>
+                </a>
+            <div class="form login">
+                
+                <div class="alert alert-danger" *ngIf="errors.length > 0">
+                    <br>
+                    <h5 id="msgRetorno">Opa! Alguma coisa não deu certo:</h5>
+                    <ul>
+                        <li *ngFor="let error of errors">{{error}}</li>
+                    </ul>
+                </div>
+
+                <span class="title">Novo produto</span>                
+                <form novalidate [formGroup]="cadastroForm" (ngSubmit)="adicionarProduto()">
+
+                    <div class="input-field" [ngClass]="{'input-invalid': isInputInvalid('nome'),'input-valid': isInputValid('nome')}">
+                        <input type="text" placeholder="Nome do produto" formControlName="nome"/>
+                <span class="text-danger" *ngIf="isInputInvalid('nome')">
+                    <p>Preencha o campo nome</p>
+                </span>
+                <i class="fa-solid fa-check icon"></i>
+                        
+                    </div>
+                    <div class="input-field"  [ngClass]="{'input-invalid': isInputInvalid('preco'),'input-valid': isInputValid('preco')}">
+                        <input type="number" placeholder="Preço" formControlName="preco" />
+                        <span class="text-danger" *ngIf="cadastroForm.get('preco')?.errors && (cadastroForm.get('preco')?.touched || cadastroForm.get('preco')?.dirty)">
+                            <p>Insira o preço do produto</p>
+                        </span>
+                        <i class="fa-solid fa-hand-holding-dollar icon"></i>  
+                    </div>
+                    <div class="input-field"  [ngClass]="{'input-invalid': isInputInvalid('descricao'),'input-valid': isInputValid('descricao')}">
+                        <input type="text" placeholder="Descrição" formControlName="descricao"/>
+                        <span class="text-danger" *ngIf="isInputInvalid('descricao')">
+                            <p>Preencha o campo descrição</p>
+                        </span>
+                        <i class="fa-solid fa-quote-left icon"></i>
+                    </div>
+                    <div class="input-field"  [ngClass]="{'input-invalid': isInputInvalid('imgUrl'),'input-valid': isInputValid('imgUrl')}">
+                        <input type="text" placeholder="URL da imagem" formControlName="imgUrl" />
+                        <span class="text-danger" *ngIf="isInputInvalid('imgUrl')">
+                            <p>Insira a url da imagem</p>
+                        </span>
+                        <i class="fa-solid fa-link icon"></i>
+                    </div>
+                    <div class="checkbox-text">
+                        <div class="checkbox-content">
+                            <input type="checkbox" formControlName="ativo" >
+                            <label for="logCheck" class="text">Ativo</label>
+                        </div>
+                    </div>
+                   
+                    <div class="input-field button">
+                            <input type="submit" [disabled]="!cadastroForm.valid" value="Cadastro">
+                        </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>

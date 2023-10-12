@@ -1,0 +1,24 @@
+.footer {
+    position: sticky;
+    top: 105vh;
+    bottom: 0;
+  }
+  /*https://css-tricks.com/a-clever-sticky-footer-technique/*/
+
+  @media(max-width:1152px){
+    footer{
+        margin-top: 25%;
+    }
+}
+@media(max-width:510px){
+  footer{
+      margin-top: 50%;
+  }
+}
+@media(max-width:358px){
+  footer{
+      margin-top: 90%;
+  }
+}
+
+
