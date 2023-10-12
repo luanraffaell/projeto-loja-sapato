@@ -1,4 +1,5 @@
 package com.lojasapato.lojasapato.infrastructure.config;
+
 import com.lojasapato.lojasapato.domain.exception.EntidadeNaoEncontradaException;
 import com.lojasapato.lojasapato.infrastructure.repositories.UsuarioRepository;
 import lombok.AllArgsConstructor;
@@ -9,7 +10,6 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @AllArgsConstructor
@@ -37,6 +37,5 @@ public class AppConfig {
 //        dao.setPasswordEncoder(passwordEncoder());
 //        return dao;
 //    }
-
 
 }

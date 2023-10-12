@@ -1,16 +1,18 @@
 package com.lojasapato.lojasapato.domain.service;
 
+import com.itextpdf.text.DocumentException;
 import com.lojasapato.lojasapato.api.model.PedidoResponseDTO;
 import com.lojasapato.lojasapato.domain.exception.EntidadeNaoEncontradaException;
 import com.lojasapato.lojasapato.domain.model.Pedido;
 import com.lojasapato.lojasapato.domain.model.TipoUsuario;
 import com.lojasapato.lojasapato.domain.model.Usuario;
 import com.lojasapato.lojasapato.infrastructure.repositories.PedidoRepository;
+import com.lojasapato.lojasapato.utils.NotaFiscalPdf;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
 public class PedidoService {
     private final PedidoRepository pedidoRepository;
     private final UsuarioService usuarioService;
+    private final NotaFiscalPdf notaFiscalPdf;
     public List<PedidoResponseDTO>listarPedidos(){
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Usuario usuario = this.usuarioService.findUsuarioByEmail(email);
@@ -37,6 +40,11 @@ public class PedidoService {
                 .orElseThrow(() ->
                         new EntidadeNaoEncontradaException("Não foi encontrado um pedido com id:" + id));
         return new PedidoResponseDTO(pedido);
+
+    }
+    public byte[] gerarNota(Long id) throws DocumentException, IOException {
+        PedidoResponseDTO pedido = this.buscarOuFalhar(id);
+        return this.notaFiscalPdf.createNotaFiscalPdf(pedido);
 
     }
 }
