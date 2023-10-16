@@ -7,6 +7,7 @@ import { AdminRouterModule } from './admin-dashboard/admin.router';
 import { ProdutoModule } from '../produto/produto.module';
 import { ContaService } from '../conta/services/conta.service';
 import { ProdutoService } from '../produto/services/produto-service.service';
+import { AdminGuard } from './services/admin.guars';
 
 
 
@@ -22,6 +23,6 @@ import { ProdutoService } from '../produto/services/produto-service.service';
    
   ],
   exports: [AdminDashboardComponent],
-  providers:[ContaService, ProdutoService]
+  providers:[ContaService, ProdutoService, AdminGuard]
 })
 export class AdminModule { }

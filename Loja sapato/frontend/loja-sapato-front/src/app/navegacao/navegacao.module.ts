@@ -10,6 +10,7 @@ import { MenuLoginComponent } from './menu/menu-component/menu-login.component';
 import { CarrinhoService } from '../produto/vendas/carrinho/carrinho.service';
 import { ProdutoModule } from '../produto/produto.module';
 import { VendasModule } from '../produto/vendas/vendas.module';
+import { AcessoNegadoComponent } from './acesso-negado/acesso-negado.component';
 
 
 
@@ -20,7 +21,8 @@ import { VendasModule } from '../produto/vendas/vendas.module';
     FooterComponent,
     HomeComponent,
     NotFoundComponent,
-    MenuLoginComponent
+    MenuLoginComponent,
+    AcessoNegadoComponent
 
   ],
   imports: [
@@ -33,7 +35,8 @@ import { VendasModule } from '../produto/vendas/vendas.module';
     MenuComponent,
     FooterComponent,
     HomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    AcessoNegadoComponent
   ],
   providers:[
     CarrinhoService

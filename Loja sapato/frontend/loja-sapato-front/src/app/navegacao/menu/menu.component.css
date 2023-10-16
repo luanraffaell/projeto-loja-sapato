@@ -15,7 +15,9 @@
 .nav-link:hover {
     color: green !important;
 }
-
+.active{
+  color: green !important;
+}
 .nav-items {
     margin-right: 1rem; /* Use 'rem' para margens */
     padding: 0.5rem; /* Use 'rem' para preenchimento */

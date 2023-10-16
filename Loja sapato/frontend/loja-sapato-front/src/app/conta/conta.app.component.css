@@ -3,7 +3,6 @@
 .container-bd{
     display: flex;
     align-items: center;
-    margin-top: 50px;
     min-height: 100%;
     flex-direction: column;
     justify-content: center;

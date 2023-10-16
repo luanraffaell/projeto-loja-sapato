@@ -17,6 +17,7 @@ export class ErrorInterceptor implements HttpInterceptor{
             if(error instanceof HttpErrorResponse){
                 if(error.status === 401){
                     this.localStorageUtils.limparDadosLocaisUsuario();
+                    window.location.reload();
                     this.router.navigate(['/conta/login']);
                 }
                 if(error.status === 403){

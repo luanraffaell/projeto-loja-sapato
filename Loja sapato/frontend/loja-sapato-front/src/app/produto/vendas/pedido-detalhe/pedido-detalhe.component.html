@@ -42,7 +42,7 @@
   
               <div class="d-flex justify-content-between pt-2">
                 <p class="text-muted mb-0">Forma de pagamento : {{pedido.formaPagamento}}</p>
-                <p class="text-muted mb-0"><span class="fw-bold me-4">Disconto</span> R$0,00</p>
+                <p class="text-muted mb-0"><span class="fw-bold me-4">Desconto</span> R$0,00</p>
               </div>
   
               <div class="d-flex justify-content-between">
@@ -53,6 +53,9 @@
               <div class="d-flex justify-content-between mb-5">
                 <p class="text-muted mb-0">Protocolo : {{pedido.protocolo}}</p>
                 <p class="text-muted mb-0"><span class="fw-bold me-4">Envio:</span> Loja</p>
+              </div>
+              <div class="d-flex justify-content-between mb-5">
+                <p class="text-muted mb-0">Vendedor : {{pedido.funcionario.nome}}</p>
               </div>
               <div class="d-flex justify-content-between mb-2">
                 <p class="text-muted mb-0">Status : {{pedido.statusPedido}}</p>

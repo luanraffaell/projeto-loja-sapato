@@ -20,7 +20,7 @@ export class MenuLoginComponent {
     this.user = this.localStorageUtils.obterUsuario()
 
     if(this.user != ''){
-      this.email = this.user;
+      this.email = this.user.username;
     }
       
       return this.token !== '';  
@@ -28,6 +28,7 @@ export class MenuLoginComponent {
 
   logout(){
     this.localStorageUtils.limparDadosLocaisUsuario()
+    window.location.reload();
     this.route.navigate(['/conta/login'])
   }
 

@@ -1,6 +1,7 @@
-import { NgModule } from "@angular/core";
+import { Component, NgModule } from "@angular/core";
 import { Router, RouterModule, Routes } from "@angular/router";
 import { AdminDashboardComponent } from "./admin-dashboard.component";
+import { PedidoComponent } from "src/app/produto/vendas/pedido/pedido.component";
 
 
 const adminRouter: Routes = [
@@ -13,7 +14,12 @@ const adminRouter: Routes = [
             path:'usuarios',
             loadChildren: () => import('../../usuario/usuario.module')
             .then(m => m.UsuarioModule)
-            }
+            },
+            {
+            path:'pedidos',
+            loadChildren: () => import('../../produto/vendas/vendas.module')
+            .then(m => m.VendasModule)
+            },
             
         ]
         

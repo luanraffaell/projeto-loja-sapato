@@ -1,4 +1,4 @@
-  <div class="fixed-top">
+  <div class="fixed-top" *ngIf="showMenu()">
     <div>
       <nav class="navbar navbar-expand-lg bg-dark">
         <div class="container main-container">
@@ -19,25 +19,25 @@
         <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/home']">Home</a>
+              <a class="nav-link" *ngIf="showMenu()" [routerLinkActiveOptions]="{exact : true}" routerLinkActive="active" [routerLink]="['/home']">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/vendas']">Produtos</a>
+              <a class="nav-link" *ngIf="showMenu()"  [routerLinkActiveOptions]="{exact : true}" routerLinkActive="active" [routerLink]="['/vendas']">Produtos</a>
             </li> 
             <li class="nav-item">
-              <a class="nav-link"[routerLink]="['vendas/pedidos']">Pedidos</a>
+              <a class="nav-link" *ngIf="showMenu()"  [routerLinkActiveOptions]="{exact : true}" routerLinkActive="active" [routerLink]="['vendas/pedidos']">Pedidos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Sobre</a>
+              <a class="nav-link" *ngIf="showMenu()"  [routerLinkActiveOptions]="{exact : true}" routerLinkActive="active" href="#">Sobre</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="['/admin']">Admin</a>
+              <a class="nav-link" *ngIf="showMenuAuth('ADMIN')" [routerLinkActiveOptions]="{exact : true}" routerLinkActive="active" [routerLink]="['/admin']">Admin</a>
             </li>
             
           </ul>     
           
         </div>   
-       <app-carrinho></app-carrinho>        
+       <app-carrinho *ngIf="showMenu()" ></app-carrinho>        
 
       </div>
       
