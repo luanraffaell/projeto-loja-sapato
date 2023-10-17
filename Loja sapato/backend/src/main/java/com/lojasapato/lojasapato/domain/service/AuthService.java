@@ -33,13 +33,14 @@ public class AuthService {
                 .build();
         user = usuarioService.criarUsuario(user);
         String token = jwtService.generateToken(user);
-        return new AuthenticationResponse(user.getUsername(),token);
+        return new AuthenticationResponse(user.getUsername(),token,user.getTipoUsuario().name());
     }
     public AuthenticationResponse authenticate(LoginDTO login){
         var auth = new UsernamePasswordAuthenticationToken(login.email(),login.senha());
         authenticationManager.authenticate(auth);
         UserDetails userDetails = userDetailsService.loadUserByUsername(login.email());
         String token = jwtService.generateToken(userDetails);
-        return new AuthenticationResponse(userDetails.getUsername(), token);
+        Usuario usuario = (Usuario) userDetails;
+        return new AuthenticationResponse(userDetails.getUsername(), token, usuario.getTipoUsuario().name());
     }
 }
