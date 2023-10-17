@@ -8,20 +8,21 @@ import { ProdutoRouter } from './produto.router';
 import { ProdutoService } from './services/produto-service.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CarrinhoService } from './vendas/carrinho/carrinho.service';
-
+import { TagInputModule } from 'ngx-chips';
 
 @NgModule({
   declarations: [
     EditarComponent,
     ProdutoListarComponent,
     ProdutoNovoComponent,
-    ProdutoDetalheComponent
+    ProdutoDetalheComponent,
   ],
   imports: [
     CommonModule,
     ProdutoRouter,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TagInputModule
     
   ],
   exports: [

@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-lg-4 col-md-6 mb-4" *ngFor="let produto of produtos">
 
-          <div class="card">
+          <!-- <div class="card">
             <img class="card-img" [src]="produto.imgUrl" [style.height.px]="250" alt="Vans">
            
             <div class="card-img-overlay d-flex justify-content-end">
@@ -18,19 +18,13 @@
               <p class="card-text">
                 {{produto.descricao}}
                </p>
-              <div class=" d-flex flex-fill">
+               <div class=" d-flex flex-fill">
                  <select class="form-select" aria-label="Default select example">
                     <option selected>Cor</option>
-                    <option value="1">Verde</option>
-                    <option value="2">Azul</option>
-                    <option value="3">Vermelho</option>
                 </select>
-                <select class="form-select">
-                    <option selected>Tamanho</option>
-                    <option value="1">41</option>
-                    <option value="2">42</option>
-                    <option value="3">43</option>
-                </select>
+                  <select class="form-select">
+                      <option selected>Tamanho</option>
+                  </select>
               </div>
               <div class="buy d-flex justify-content-between align-items-center">
                 <div class="price text-success"><h5 class="mt-4">{{produto.preco | currency:'BRL'}}</h5></div>
@@ -41,9 +35,9 @@
               </button>
             </div>
             
-          </div>
+          </div> -->
 
-
+          <app-card-produto [produto]="produto"></app-card-produto>
         </div>
       </div>
     </div>

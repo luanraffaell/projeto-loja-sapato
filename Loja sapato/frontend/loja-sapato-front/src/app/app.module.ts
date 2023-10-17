@@ -13,7 +13,7 @@ import { UsuarioModule } from './usuario/usuario.module';
 import { VendasModule } from './produto/vendas/vendas.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorInterceptor } from './services/error.handler.service';
-import { AcessoNegadoComponent } from './navegacao/acesso-negado/acesso-negado.component';
+
 
 export const httpInterceptorProviders = [
   {
@@ -36,7 +36,7 @@ export const httpInterceptorProviders = [
     UsuarioModule,
     VendasModule,
     ToastrModule.forRoot(),
-    HttpClientModule  
+    HttpClientModule,
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

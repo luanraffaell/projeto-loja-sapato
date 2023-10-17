@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { VendasComponent } from './vendas.component';
 import { CarrinhoComponent } from './carrinho/carrinho.component';
 import { CheckoutComponent } from './checkout/checkout.component';
-import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { VendasRouter } from './vendas.routing';
 import { PedidoServiceService } from './services/pedido-service.service';
 import { PedidoComponent } from './pedido/pedido.component';
 import { PedidoDetalheComponent } from './pedido-detalhe/pedido-detalhe.component';
+import { CardProdutoComponent } from './card-produto/card-produto.component';
 
 
 
@@ -20,6 +20,7 @@ import { PedidoDetalheComponent } from './pedido-detalhe/pedido-detalhe.componen
     CheckoutComponent,
     PedidoComponent,
     PedidoDetalheComponent,
+    CardProdutoComponent,
   ],
   imports: [
     CommonModule,
@@ -33,7 +34,8 @@ import { PedidoDetalheComponent } from './pedido-detalhe/pedido-detalhe.componen
     CarrinhoComponent,
     CheckoutComponent,
     PedidoComponent,
-    PedidoDetalheComponent
+    PedidoDetalheComponent,
+    CardProdutoComponent
   ],
   providers: [
     PedidoServiceService

@@ -20,14 +20,14 @@ export class VendasComponent implements OnInit {
     this.listarProdutos()
   }
 
-    listarProdutos(){
-      this.produtoService.listarTodosProdutos()
-        .subscribe({
-          next: (s) => this.processarSucesso(s),
-          error: (s) => this.processarErro(s)
-        })
-    }
-  processarSucesso(response: Produto){  
+  listarProdutos(){
+     this.produtoService.listarTodosProdutos()
+       .subscribe({
+         next: (s) => this.processarSucesso(s),
+         error: (s) => this.processarErro(s)
+       })
+   }
+  processarSucesso(response: any){  
     this.errors = []
     this.produtos = response;
   }
@@ -36,7 +36,5 @@ export class VendasComponent implements OnInit {
     this.errors = [erro.error.detail]
   }
 
-  adicionarProdutoAoCarrinho(produto:any){
-    this.carrinhoService.adicionarItem(produto);
-  }
+ 
 }

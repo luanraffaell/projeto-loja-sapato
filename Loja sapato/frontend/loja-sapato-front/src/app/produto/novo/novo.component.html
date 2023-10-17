@@ -16,49 +16,73 @@
 
                 <span class="title">Novo produto</span>                
                 <form novalidate [formGroup]="cadastroForm" (ngSubmit)="adicionarProduto()">
+                    <div class="row">
+                            <div class="input-field col-6" [ngClass]="{'input-invalid': isInputInvalid('nome'),'input-valid': isInputValid('nome')}">
+                                <input type="text" placeholder="Nome do produto" formControlName="nome"/>
+                            <span class="text-danger" *ngIf="isInputInvalid('nome')">
+                                <p>Preencha o campo nome</p>
+                            </span>
+                            <i class="fa-solid fa-check icon"></i>
+                                
+                            </div>
+                            <div class="input-field input-metade"  [ngClass]="{'input-invalid': isInputInvalid('preco'),'input-valid': isInputValid('preco')}">
+                                <input type="number" placeholder="Preço" formControlName="preco" />
+                                <span class="text-danger" *ngIf="cadastroForm.get('preco')?.errors && (cadastroForm.get('preco')?.touched || cadastroForm.get('preco')?.dirty)">
+                                    <p>Insira o preço do produto</p>
+                                </span>
+                                <i class="fa-solid fa-hand-holding-dollar icon"></i>  
+                            </div>
+                            <div class="input-field col-12"  [ngClass]="{'input-invalid': isInputInvalid('descricao'),'input-valid': isInputValid('descricao')}">
+                                <input type="text" placeholder="Descrição" formControlName="descricao"/>
+                                <span class="text-danger" *ngIf="isInputInvalid('descricao')">
+                                    <p>Preencha o campo descrição</p>
+                                </span>
+                                <i class="fa-solid fa-quote-left icon"></i>
+                            </div>
 
-                    <div class="input-field" [ngClass]="{'input-invalid': isInputInvalid('nome'),'input-valid': isInputValid('nome')}">
-                        <input type="text" placeholder="Nome do produto" formControlName="nome"/>
-                <span class="text-danger" *ngIf="isInputInvalid('nome')">
-                    <p>Preencha o campo nome</p>
-                </span>
-                <i class="fa-solid fa-check icon"></i>
-                        
+                            <button class="btn btn-outline-success btn-cores" (click)="adicionarCores()">Novas cores</button>
+                            <ng-container formArrayName="corTamanho" *ngFor="let cor of cores.controls; let index = index">
+                                <div class="row">
+                                <span type="button" class="btn-remover-cores" (click)="removerCores(index)"><i class="fa-solid fa-x"></i></span>
+
+                                  <div [formGroupName]="index" class="col-4 input-color">
+                                    <div class="input-field">
+                                      <input type="text" placeholder="Cor" formControlName="cor" />
+                                      <i class="fa-solid fa-droplet icon"></i>
+                                    </div>
+                                  </div>
+                                  <div [formGroupName]="index" class="col-6 input-color">
+                                    <div class="input-field">
+                                      <tag-input formControlName="tamanhos"
+                                       secondaryPlaceholder="Tamanho + enter"
+                                       [theme]="'foundation-theme'"></tag-input>
+                                       <i class="fa-solid fa-ruler-combined icon"></i>
+                                    </div>
+                                  </div>
+                                </div>
+                              </ng-container>
+                            
+                            <!---->
+                            <div class="input-field"  [ngClass]="{'input-invalid': isInputInvalid('imgUrl'),'input-valid': isInputValid('imgUrl')}">
+                                <input type="text" placeholder="URL da imagem" formControlName="imgUrl" />
+                                <span class="text-danger" *ngIf="isInputInvalid('imgUrl')">
+                                    <p>Insira a url da imagem</p>
+                                </span>
+                                <i class="fa-solid fa-link icon"></i>
+                            </div>
+                            <div class="checkbox-text">
+                                <div class="checkbox-content">
+                                    <input type="checkbox" formControlName="ativo" >
+                                    <label for="logCheck" class="text">Ativo</label>
+                                </div>
+                            </div>
+                            <div class="input-field button">
+                                    <input type="submit" [disabled]="!cadastroForm.valid" value="Cadastro">
+                            </div>
                     </div>
-                    <div class="input-field"  [ngClass]="{'input-invalid': isInputInvalid('preco'),'input-valid': isInputValid('preco')}">
-                        <input type="number" placeholder="Preço" formControlName="preco" />
-                        <span class="text-danger" *ngIf="cadastroForm.get('preco')?.errors && (cadastroForm.get('preco')?.touched || cadastroForm.get('preco')?.dirty)">
-                            <p>Insira o preço do produto</p>
-                        </span>
-                        <i class="fa-solid fa-hand-holding-dollar icon"></i>  
-                    </div>
-                    <div class="input-field"  [ngClass]="{'input-invalid': isInputInvalid('descricao'),'input-valid': isInputValid('descricao')}">
-                        <input type="text" placeholder="Descrição" formControlName="descricao"/>
-                        <span class="text-danger" *ngIf="isInputInvalid('descricao')">
-                            <p>Preencha o campo descrição</p>
-                        </span>
-                        <i class="fa-solid fa-quote-left icon"></i>
-                    </div>
-                    <div class="input-field"  [ngClass]="{'input-invalid': isInputInvalid('imgUrl'),'input-valid': isInputValid('imgUrl')}">
-                        <input type="text" placeholder="URL da imagem" formControlName="imgUrl" />
-                        <span class="text-danger" *ngIf="isInputInvalid('imgUrl')">
-                            <p>Insira a url da imagem</p>
-                        </span>
-                        <i class="fa-solid fa-link icon"></i>
-                    </div>
-                    <div class="checkbox-text">
-                        <div class="checkbox-content">
-                            <input type="checkbox" formControlName="ativo" >
-                            <label for="logCheck" class="text">Ativo</label>
-                        </div>
-                    </div>
-                   
-                    <div class="input-field button">
-                            <input type="submit" [disabled]="!cadastroForm.valid" value="Cadastro">
-                        </div>
                 </form>
-                
             </div>
         </div>
     </div>
 </div>
+
