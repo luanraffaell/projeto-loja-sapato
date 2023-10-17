@@ -30,7 +30,7 @@ public class Usuario implements Serializable, UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(tipoUsuario.name()));
+        return List.of(new SimpleGrantedAuthority("ROLE_"+tipoUsuario.name()));
     }
 
     @Override
