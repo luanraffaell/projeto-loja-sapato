@@ -10,7 +10,7 @@ export class CarrinhoService {
 
   adicionarItem(item: any) {
     const carrinhoAtual = this.carrinhoSubject.value;
-    const productExistInCart = carrinhoAtual.find(({id}:any) => id === item.id)
+    const productExistInCart = carrinhoAtual.find((prod:any) => prod.id === item.id && prod.cor === item.cor && prod.tamanho === item.tamanho)
     if (!productExistInCart) {
       carrinhoAtual.push({ ...item, qtd: 1 }); // enhance "porduct" object with "num" property
       this.carrinhoSubject.next(carrinhoAtual);

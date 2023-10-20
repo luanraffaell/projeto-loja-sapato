@@ -1,6 +1,6 @@
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProdutoService } from '../services/produto-service.service';
 import { Produto } from '../models/produto';
@@ -8,13 +8,13 @@ import { Produto } from '../models/produto';
 @Component({
   selector: 'app-editar',
   templateUrl: './editar.component.html',
-  styleUrls: ['../produto.component.css']
+  styleUrls: ['../novo/novo.component.css','../novo/foundation-themes.scss']
 })
 export class EditarComponent implements OnInit {
     cadastroForm: FormGroup;
     productId: number;
     fieldTextType: boolean;
-    produto: Produto;
+    produto: any;
     errors: any[] = []
 
     constructor(
@@ -33,15 +33,41 @@ export class EditarComponent implements OnInit {
       nome: ['', Validators.required],
       preco: ['', Validators.required],
       descricao: ['', Validators.required],
-      ativo:['',Validators.required],
-      imgUrl:['',Validators.required],
-      id:['']
+      ativo:['',Validators.required], 
+      id:[''],
+      corTamanho: this.formBuilder.array([]),
     })
 
     this.produtoService.buscarProdutoPorId(this.productId)
       .subscribe((produto) => {
+        produto.corTamanho.forEach((cor: any) => {
+          cor.tamanhos = cor.tamanhos.map((tamanho: number) => tamanho.toString());
+          this.carregarCores(cor.cor, cor.tamanhos, cor.imgUrl);
+        });
         this.cadastroForm.patchValue(produto)
       })
+      
+  }
+  get cores(){
+    return <FormArray>this.cadastroForm?.get('corTamanho')
+  }
+  adicionarCores(){
+    this.cores.push(this.coresForm())
+  }
+  carregarCores(cor: string, tamanhos: string, imgUrl: string) {
+    const control = this.coresForm();
+    control.patchValue({ cor, tamanhos, imgUrl });
+    this.cores.push(control);
+  }
+  removerCores(index:any){
+    this.cores.removeAt(index);
+  }
+  coresForm(): FormGroup{
+    return new FormGroup({
+      cor: new FormControl(''),
+      tamanhos: new FormControl(''),
+      imgUrl: new FormControl('')
+    })
   }
 
   toggleFieldTextType() {
@@ -60,7 +86,16 @@ export class EditarComponent implements OnInit {
   adicionarProduto(){
     if(this.cadastroForm.dirty && this.cadastroForm.valid){
       this.produto = Object.assign({},this.produto,this.cadastroForm.value)
-      this.produtoService.cadastrarProduto(this.produto)
+      let corTamanhoExtract = this.produto.corTamanho.map((x:any) => {
+        let prod = {
+          cor: x.cor,
+          tamanhos: x.tamanhos.map((f:any) => f.value),
+          imgUrl: x.imgUrl
+        }
+        return prod;
+      })
+      this.produto.corTamanho = corTamanhoExtract;
+      this.produtoService.atualizarProduto(this.produto)
           .subscribe(
             sucesso => {this.processarSucesso(sucesso)},
             falha => {this.processarFalha(falha)}

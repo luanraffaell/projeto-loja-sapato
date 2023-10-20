@@ -35,7 +35,7 @@
   .carrinho-detalhe{
     max-height: 400px;
     overflow-y: auto;
-    width: 100px
+    width: 150px
 }
 .detalhe-carrinho{
   max-height: 200px;
@@ -85,7 +85,7 @@
   margin: 20px 0;
   float: right;
   background: white;
-  width: 320px;
+  width: 400px;
   position: relative;
   border-radius: 3px;
   padding: 20px;

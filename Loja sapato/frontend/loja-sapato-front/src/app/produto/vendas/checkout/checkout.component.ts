@@ -32,6 +32,7 @@ export class CheckoutComponent implements OnInit {
 
   enviarPedido(){
    this.montarPedido()
+   console.log(this.pedido)
    this.pedidoService.criarPedido(this.pedido)
       .subscribe({
         next: (s) => this.processarSucesso(s),
@@ -54,14 +55,17 @@ export class CheckoutComponent implements OnInit {
   montarPedido(){
     this.pedido.vendedorId = 0,
     this.pedido.formaPagamentoId = this.cadastroForm.get('selectField')?.value;
-    console.log("Field:"+this.cadastroForm.get('selectField')?.value)
     this.pedido.itens = this.carrinho.map((p:any) => {
       let pedido = {
         id: Number,
-        quantidade: Number
+        quantidade: Number,
+        cor: String,
+        tamanho: Number
       }
       pedido.id = p.id;
       pedido.quantidade = p.qtd;
+      pedido.cor = p.cor;
+      pedido.tamanho = p.tamanho;
       return pedido;
     })
   }

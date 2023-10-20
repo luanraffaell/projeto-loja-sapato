@@ -28,5 +28,7 @@ public class ProdutoVariacao implements Serializable {
     @CollectionTable(name = "tb_produto_tamanho", joinColumns = @JoinColumn(name = "variacao_id"))
     @Column(name = "tamanho")
     private List<Integer> tamanhos = new ArrayList<>();
+    @Lob
+    private String imgUrl;
 
 }

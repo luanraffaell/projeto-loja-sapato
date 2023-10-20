@@ -17,8 +17,12 @@ cadastrarProduto(produto:Produto): Observable<Produto>{
     return this.http.post<Produto>(this.urlServiceV1 + 'produtos',produto, this.obterHeaderAuth())
             .pipe(catchError(this.serviceError))
 }
-buscarProdutoPorId(id:number): Observable<Produto>{
-  return this.http.get<Produto>(this.urlServiceV1 +`produtos/${id}`,this.obterHeaderAuth())
+atualizarProduto(produto:Produto): Observable<Produto>{
+  return this.http.put<Produto>(this.urlServiceV1 + `produtos/${produto.id}`,produto, this.obterHeaderAuth())
+          .pipe(catchError(this.serviceError))
+}
+buscarProdutoPorId(id:number): Observable<any>{
+  return this.http.get<any>(this.urlServiceV1 +`produtos/${id}`,this.obterHeaderAuth())
     .pipe(catchError(this.serviceError))
 }
 deletarProdutoPorId(id:number):Observable<any>{

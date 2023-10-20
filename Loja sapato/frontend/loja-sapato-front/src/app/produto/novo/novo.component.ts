@@ -16,7 +16,7 @@ export class ProdutoNovoComponent implements OnInit {
   produto: any
   fieldTextType: boolean;
   errors: any[] = []
-  chipsModel: string[] = [];
+
 
   constructor(private fb: FormBuilder,
     private route: Router,
@@ -30,7 +30,6 @@ export class ProdutoNovoComponent implements OnInit {
       nome:['', Validators.required],
       preco:['', [Validators.required]],
       descricao:['',[Validators.required,Validators.minLength(4)]],
-      imgUrl:['',Validators.required],
       ativo:[false],
       corTamanho: this.fb.array([])
     })
@@ -48,7 +47,8 @@ export class ProdutoNovoComponent implements OnInit {
   coresForm(): FormGroup{
     return new FormGroup({
       cor: new FormControl(''),
-      tamanhos: new FormControl('')
+      tamanhos: new FormControl(''),
+      imgUrl: new FormControl('')
     })
   }
   getFinalData(){
@@ -61,7 +61,8 @@ export class ProdutoNovoComponent implements OnInit {
         let corTamanhoExtract = this.produto.corTamanho.map((x:any) => {
           let prod = {
             cor: x.cor,
-            tamanhos: x.tamanhos.map((f:any) => f.value)
+            tamanhos: x.tamanhos.map((f:any) => f.value),
+            imgUrl: x.imgUrl
           }
           return prod;
         })

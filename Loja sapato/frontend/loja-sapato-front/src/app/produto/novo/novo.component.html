@@ -43,7 +43,7 @@
                             <button class="btn btn-outline-success btn-cores" (click)="adicionarCores()">Novas cores</button>
                             <ng-container formArrayName="corTamanho" *ngFor="let cor of cores.controls; let index = index">
                                 <div class="row">
-                                <span type="button" class="btn-remover-cores" (click)="removerCores(index)"><i class="fa-solid fa-x"></i></span>
+                                    <span type="button" class="btn-remover-cores" (click)="removerCores(index)"><i class="fa-solid fa-x"></i></span>
 
                                   <div [formGroupName]="index" class="col-4 input-color">
                                     <div class="input-field">
@@ -52,24 +52,21 @@
                                     </div>
                                   </div>
                                   <div [formGroupName]="index" class="col-6 input-color">
-                                    <div class="input-field">
-                                      <tag-input formControlName="tamanhos"
-                                       secondaryPlaceholder="Tamanho + enter"
-                                       [theme]="'foundation-theme'"></tag-input>
-                                       <i class="fa-solid fa-ruler-combined icon"></i>
+                                        <div class="input-field">
+                                            <tag-input formControlName="tamanhos"
+                                            secondaryPlaceholder="Tamanho + enter"
+                                            [theme]="'foundation-theme'"></tag-input>
+                                            <i class="fa-solid fa-ruler-combined icon"></i>
+                                        </div>
                                     </div>
-                                  </div>
+                                    <div [formGroupName]="index" class="input-field" >
+                                        <input type="text" placeholder="URL da imagem" formControlName="imgUrl" />
+                                        <i class="fa-solid fa-link icon"></i>
+                                    </div>
                                 </div>
                               </ng-container>
                             
                             <!---->
-                            <div class="input-field"  [ngClass]="{'input-invalid': isInputInvalid('imgUrl'),'input-valid': isInputValid('imgUrl')}">
-                                <input type="text" placeholder="URL da imagem" formControlName="imgUrl" />
-                                <span class="text-danger" *ngIf="isInputInvalid('imgUrl')">
-                                    <p>Insira a url da imagem</p>
-                                </span>
-                                <i class="fa-solid fa-link icon"></i>
-                            </div>
                             <div class="checkbox-text">
                                 <div class="checkbox-content">
                                     <input type="checkbox" formControlName="ativo" >
