@@ -16,13 +16,24 @@ public class ItemDTO {
     private Integer quantidade;
     private BigDecimal precoUnitario;
     private BigDecimal precoTotal;
+    private String cor;
+    private Integer tamanho;
     private String observacao;
 
     public ItemDTO(ItemPedido itemPedido) {
-        this.produtoDTO = new ProdutoDTO(itemPedido.getId().getProduto());
+        this.produtoDTO = new ProdutoDTO(itemPedido.getProduto());
+        this.produtoDTO.setImgUrl(this.buscarUrlImagem(itemPedido));
         this.quantidade = itemPedido.getQuantidade();
         this.precoUnitario = itemPedido.getPrecoUnitario();
         this.precoTotal = itemPedido.getPrecoTotal();
         this.observacao = itemPedido.getObservacao();
+        this.cor = itemPedido.getCor();
+        this.tamanho = itemPedido.getTamanho();
+    }
+    private String buscarUrlImagem(ItemPedido item){
+        return item.getProduto()
+                .getCorTamanho().stream()
+                .filter(p -> p.getCor().equals(item.getCor())).findFirst().get().getImgUrl();
+
     }
 }

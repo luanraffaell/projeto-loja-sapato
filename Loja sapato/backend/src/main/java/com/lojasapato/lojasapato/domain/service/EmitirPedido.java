@@ -56,10 +56,12 @@ public class EmitirPedido {
         pedidoDTO.getItens().forEach(item -> {
             Produto produto = this.produtoService.buscarProdutoPorId(item.getId());
             ItemPedido itemPedido = new ItemPedido();
-            itemPedido.getId().setPedido(pedido);
-            itemPedido.getId().setProduto(produto);
+            itemPedido.setPedido(pedido);
+            itemPedido.setProduto(produto);
             itemPedido.setPrecoUnitario(produto.getPreco());
             itemPedido.setQuantidade(item.getQuantidade());
+            itemPedido.setTamanho(item.getTamanho());
+            itemPedido.setCor(item.getCor());
             listaDeItens.add(itemPedido);
         });
         return listaDeItens;

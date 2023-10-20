@@ -26,6 +26,11 @@ public class ProdutoController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(this.produtoService.cadastrarProduto(produto));
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<Produto> atualizarProduto(@PathVariable Long id, @RequestBody Produto produto){
+        return ResponseEntity.ok()
+                .body(this.produtoService.atualizarProduto(id,produto));
+    }
     @GetMapping("/{id}")
     public ResponseEntity<Produto> obterProdutoPorId(@PathVariable Long id){
         return ResponseEntity.ok().body(this.produtoService.buscarProdutoPorId(id));

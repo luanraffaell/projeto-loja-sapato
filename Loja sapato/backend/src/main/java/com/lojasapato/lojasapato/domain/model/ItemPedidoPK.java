@@ -13,7 +13,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Embeddable
 public class ItemPedidoPK implements Serializable {
-   @JsonIgnore
+    @JsonIgnore
     @EqualsAndHashCode.Include
     @ManyToOne
     @JoinColumn(name = "pedido_id")

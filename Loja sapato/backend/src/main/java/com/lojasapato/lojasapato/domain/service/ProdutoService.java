@@ -5,6 +5,7 @@ import com.lojasapato.lojasapato.domain.model.Produto;
 import com.lojasapato.lojasapato.infrastructure.repositories.ProdutoRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,6 +30,11 @@ public class ProdutoService {
     }
     @Transactional
     public Produto cadastrarProduto(Produto produto){
+        return this.produtoRepository.save(produto);
+    }
+    public Produto atualizarProduto(Long id,Produto produto){
+         Produto produtoAtual = this.buscarProdutoPorId(id);
+        BeanUtils.copyProperties(produto,produtoAtual,"id");
         return this.produtoRepository.save(produto);
     }
     @Transactional

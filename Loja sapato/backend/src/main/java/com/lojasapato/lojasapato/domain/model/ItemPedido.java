@@ -1,8 +1,7 @@
 package com.lojasapato.lojasapato.domain.model;
 
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,18 +11,31 @@ import java.math.BigDecimal;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "tb_item_pedido")
 public class ItemPedido implements Serializable {
-    @EmbeddedId
-    private ItemPedidoPK id = new ItemPedidoPK();
+//    @EmbeddedId
+//    private ItemPedidoPK id = new ItemPedidoPK();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @ManyToOne
+    @JoinColumn(name = "pedido_id")
+    private Pedido pedido;
+    @ManyToOne
+    @JoinColumn(name = "produto_id")
+    private Produto produto;
     private Integer quantidade;
     private BigDecimal precoUnitario;
     private BigDecimal precoTotal;
+    private String cor;
+    private Integer tamanho;
     private String observacao;
+
     public ItemPedido(Pedido pedido,Produto produto, Integer quantidade) {
         super();
-        id.setPedido(pedido);
-        id.setProduto(produto);
+        this.pedido = pedido;
+        this.produto = produto;
         this.quantidade = quantidade;
         this.precoUnitario = produto.getPreco();
     }

@@ -6,4 +6,6 @@ import lombok.Data;
 public class ProdutoRequestDTO {
     private Long id;
     private Integer quantidade;
+    private String cor;
+    private Integer tamanho;
 }

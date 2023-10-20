@@ -29,7 +29,7 @@ public class Pedido {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     private FormaPagamento formaPagamento;
-    @OneToMany(mappedBy = "id.pedido", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     private List<ItemPedido> itens = new ArrayList<>();
     @ManyToOne
     @JoinColumn(name = "usuario_funcionario_id")
