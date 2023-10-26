@@ -10,7 +10,6 @@ import { ProdutoService } from '../produto/services/produto-service.service';
 import { AdminGuard } from './services/admin.guars';
 
 
-
 @NgModule({
   declarations: [AdminDashboardComponent],
   imports: [
@@ -19,7 +18,7 @@ import { AdminGuard } from './services/admin.guars';
     FormsModule,
     ReactiveFormsModule,
     AdminRouterModule,
-    ProdutoModule
+    ProdutoModule,
    
   ],
   exports: [AdminDashboardComponent],

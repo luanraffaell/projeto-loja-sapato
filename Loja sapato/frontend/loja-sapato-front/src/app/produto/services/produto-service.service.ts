@@ -13,6 +13,13 @@ export class ProdutoService extends BaseService  {
     return this.http.get<any>(this.urlServiceV1 + 'produtos',this.obterHeaderAuth())
            .pipe(catchError(this.serviceError))
 }
+listarTodosProdutosPorNome(nome:any): Observable<any>{ 
+  const params = { name: nome };
+  let url = this.urlServiceV1 + 'produtos';
+  url +=`?nome=${params.name}`;
+  return this.http.get<any>(url, this.obterHeaderAuth())
+         .pipe(catchError(this.serviceError))
+}
 cadastrarProduto(produto:Produto): Observable<Produto>{
     return this.http.post<Produto>(this.urlServiceV1 + 'produtos',produto, this.obterHeaderAuth())
             .pipe(catchError(this.serviceError))

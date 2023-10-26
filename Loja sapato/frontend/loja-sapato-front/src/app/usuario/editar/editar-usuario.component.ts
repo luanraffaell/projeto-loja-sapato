@@ -39,9 +39,10 @@ export class EditarUsuarioComponent implements OnInit {
       tipoUsuario:['',Validators.required],
       id:['']  
     })
+   
     this.usuarioService.buscarUsuarioPorId(this.usuarioId)
-      .subscribe((usuario) => {
-        this.cadastroForm.patchValue(usuario)
+      .subscribe((usr) => {
+        this.cadastroForm.patchValue(usr)
       })
   }
  

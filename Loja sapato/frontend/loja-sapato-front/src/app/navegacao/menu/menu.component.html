@@ -12,7 +12,7 @@
 
     <nav class="navbar navbar-expand-md bg-body-tertiary">
       <div class="container d-flex justify-content-between align-items-center">
-        <h1 class="text-success">It's Code</h1>
+        <h1 class="text-success">LSapato</h1>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -26,9 +26,6 @@
             </li> 
             <li class="nav-item">
               <a class="nav-link" *ngIf="showMenu()"  [routerLinkActiveOptions]="{exact : true}" routerLinkActive="active" [routerLink]="['vendas/pedidos']">Pedidos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" *ngIf="showMenu()"  [routerLinkActiveOptions]="{exact : true}" routerLinkActive="active" href="#">Sobre</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" *ngIf="showMenuAuth('ADMIN')" [routerLinkActiveOptions]="{exact : true}" routerLinkActive="active" [routerLink]="['/admin']">Admin</a>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProdutoService } from '../services/produto-service.service';
 import { ToastrService } from 'ngx-toastr';
+import { FormControl } from '@angular/forms';
+import { debounceTime, map, switchMap } from 'rxjs';
 
 
 
@@ -15,15 +17,32 @@ export class ProdutoListarComponent implements OnInit {
   currentProduct = null;
   currentIndex = -1;
   name = '';
-
-  constructor(private produtoService: ProdutoService, private toastr: ToastrService){}
+  queryField = new FormControl()
+  constructor(private produtoService: ProdutoService, private toastr: ToastrService){
+    this.listarProdutos()
+  }
 
   ngOnInit(): void {
-    this.listarProdutos()
+    this.queryField.valueChanges
+    .pipe(
+      map(value => value.trim()),
+      debounceTime(200),
+      switchMap((value:any) => this.produtoService.listarTodosProdutosPorNome(value))
+    ).subscribe({
+      next: (s) => this.processarSucesso(s,'Produto listado'),
+      error: (s) => this.processarFalha(s)
+    })
   }
 
   listarProdutos(){
     this.produtoService.listarTodosProdutos()
+      .subscribe(
+        sucesso => {this.processarSucesso(sucesso,'Produtos listados')},
+        falha =>{console.log(falha)}
+      )
+  }
+  listarTodosProdutosPorNome(value:any){
+    this.produtoService.listarTodosProdutosPorNome(value)
       .subscribe(
         sucesso => {this.processarSucesso(sucesso,'Produtos listados')},
         falha =>{console.log(falha)}
@@ -37,7 +56,6 @@ export class ProdutoListarComponent implements OnInit {
       )
   }
   processarSucesso(request:any,message: string){
-    this.toastr.success(message)
     this.produtos = request;
   }
   processarDelete(request:any,message: string){

@@ -9,6 +9,8 @@ import { DetalheUsuarioComponent } from './detalhe/detalhe-usuario.component';
 import { EditarUsuarioComponent } from './editar/editar-usuario.component';
 import { ListarUsuarioComponent } from './listar/listar-usuario.component';
 import { UsuarioService } from './service/usuario.service';
+import { UsuarioSenhaComponent } from './senha/usuario-senha/usuario-senha.component';
+import { EditarSenhaComponent } from './senha/editar-senha/editar-senha.component';
 
 
 
@@ -17,7 +19,9 @@ import { UsuarioService } from './service/usuario.service';
     NovoUsuarioComponent,
     DetalheUsuarioComponent,
     EditarUsuarioComponent,
-    ListarUsuarioComponent
+    ListarUsuarioComponent,
+    UsuarioSenhaComponent,
+    EditarSenhaComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +34,9 @@ import { UsuarioService } from './service/usuario.service';
     NovoUsuarioComponent,
     DetalheUsuarioComponent,
     EditarUsuarioComponent,
-    ListarUsuarioComponent
+    ListarUsuarioComponent,
+    UsuarioSenhaComponent,
+    EditarSenhaComponent
   ],
   providers:[
     UsuarioService

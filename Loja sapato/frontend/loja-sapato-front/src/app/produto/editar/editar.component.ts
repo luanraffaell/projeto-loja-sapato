@@ -28,7 +28,6 @@ export class EditarComponent implements OnInit {
     }
   ngOnInit(): void {
     this.productId = this.route.snapshot.params['id'];
-
     this.cadastroForm = this.formBuilder.group({
       nome: ['', Validators.required],
       preco: ['', Validators.required],
@@ -37,7 +36,7 @@ export class EditarComponent implements OnInit {
       id:[''],
       corTamanho: this.formBuilder.array([]),
     })
-
+ 
     this.produtoService.buscarProdutoPorId(this.productId)
       .subscribe((produto) => {
         produto.corTamanho.forEach((cor: any) => {
@@ -89,7 +88,12 @@ export class EditarComponent implements OnInit {
       let corTamanhoExtract = this.produto.corTamanho.map((x:any) => {
         let prod = {
           cor: x.cor,
-          tamanhos: x.tamanhos.map((f:any) => f.value),
+          tamanhos: x.tamanhos.map((f:any) => {
+            if(!(f instanceof Object)){
+              return f;
+            }
+           return f.value
+          }),
           imgUrl: x.imgUrl
         }
         return prod;

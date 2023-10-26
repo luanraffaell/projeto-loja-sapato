@@ -16,8 +16,29 @@ export class UsuarioService extends BaseService {
       return this.http.get<Usuario>(this.urlServiceV1 + 'usuarios',this.obterHeaderAuth())
             .pipe(catchError(this.serviceError))
     }
-    buscarUsuarioPorId(id:any): Observable<Usuario>{
-      return this.http.get<Usuario>(this.urlServiceV1 + `usuarios/${id}`,this.obterHeaderAuth())
+    listarUsuarioPorEmail(nome:any): Observable<any>{ 
+      const params = { name: nome };
+      let url = this.urlServiceV1 + 'usuarios';
+      url +=`?valorPesquisa=${params.name}&tipoPesquisa=email`;
+      return this.http.get<any>(url, this.obterHeaderAuth())
+             .pipe(catchError(this.serviceError))
+    }
+    listarUsuarioPorCpf(nome:any): Observable<any>{ 
+      const params = { name: nome };
+      let url = this.urlServiceV1 + 'usuarios';
+      url +=`?valorPesquisa=${params.name}&tipoPesquisa=cpf`;
+      return this.http.get<any>(url, this.obterHeaderAuth())
+             .pipe(catchError(this.serviceError))
+    }
+    listarUsuarioPorID(nome:any): Observable<any>{ 
+      const params = { name: nome };
+      let url = this.urlServiceV1 + 'usuarios';
+      url +=`?valorPesquisa=${params.name}&tipoPesquisa=id`;
+      return this.http.get<any>(url, this.obterHeaderAuth())
+             .pipe(catchError(this.serviceError))
+    }
+    buscarUsuarioPorId(id:any): Observable<any>{
+      return this.http.get<any>(this.urlServiceV1 + `usuarios/${id}`,this.obterHeaderAuth())
             .pipe(catchError(this.serviceError))
     }
 
@@ -31,6 +52,11 @@ export class UsuarioService extends BaseService {
     }
     atualizarUsuario(usuario:Usuario): Observable<Usuario>{
       return this.http.put<Usuario>(this.urlServiceV1 + `usuarios/${usuario.id}`,
+      usuario,this.obterHeaderAuth())
+        .pipe(catchError(this.serviceError))
+    }
+    alterarSenha(usuario:Usuario): Observable<Usuario>{
+      return this.http.put<Usuario>(this.urlServiceV1 + `usuarios/alterar-senha/${usuario.id}`,
       usuario,this.obterHeaderAuth())
         .pipe(catchError(this.serviceError))
     }
