@@ -18,6 +18,13 @@ public class ProdutoService {
     public List<Produto> listarProdutos(){
         return this.produtoRepository.findAll();
     }
+    public List<Produto> listarPorNome(String nome){
+        if(nome == null || nome.isEmpty()){
+            return this.listarProdutos();
+        }
+        return this.produtoRepository.findByNomeContainingIgnoreCase(nome).orElseThrow(() ->
+                new EntidadeNaoEncontradaException("Produto não encontrado!"));
+    }
     public Produto buscarProdutoPorId(Long id){
         return this.produtoRepository.findById(id)
                 .orElseThrow(() ->

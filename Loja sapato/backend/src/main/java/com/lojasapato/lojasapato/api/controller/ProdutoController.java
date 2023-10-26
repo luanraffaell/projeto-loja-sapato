@@ -18,8 +18,8 @@ public class ProdutoController {
     private final ProdutoService produtoService;
 
     @GetMapping
-    public ResponseEntity<List<Produto>> listarProdutos(){
-        return ResponseEntity.ok().body(this.produtoService.listarProdutos());
+    public ResponseEntity<List<Produto>> listarProdutos(@RequestParam(required = false) String nome){
+        return ResponseEntity.ok().body(this.produtoService.listarPorNome(nome));
     }
     @PostMapping
     public ResponseEntity<Produto> cadastrarProduto(@RequestBody Produto produto){
