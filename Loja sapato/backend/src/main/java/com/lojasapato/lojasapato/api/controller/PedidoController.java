@@ -25,8 +25,8 @@ public class PedidoController {
     private final EmitirPedido emitirPedido;
 
     @GetMapping
-    public ResponseEntity<List<PedidoResponseDTO>> listarPedidos(){
-        return ResponseEntity.ok().body(this.pedidoService.listarPedidos());
+    public ResponseEntity<List<PedidoResponseDTO>> listarPedidos(@RequestParam(required = false) String protocolo){
+        return ResponseEntity.ok().body(this.pedidoService.listarPedidos(protocolo));
     }
     @PostMapping
     public ResponseEntity<PedidoResponseDTO> emitirPedido(@RequestBody PedidoRequestDTO pedidoDTO){

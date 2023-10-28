@@ -41,11 +41,14 @@
                     <td>{{ produto.preco | currency: 'BRL' }}</td>
                     <td>{{ produto.ativo ? 'Ativo' : 'Inativo' }}</td>
                     <td>
-                        <a [routerLink]="[produto.id]" class="btn"><i class='fas fa-eye view'></i></a>
-                        <a [routerLink]="['editar/',produto.id]" class="btn"><i class="fa fa-edit edit"></i></a>
-                        <button type="button" class="btn" data-bs-toggle="modal"
+                        <a [routerLink]="[produto.id]" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Visualizar">
+                            <i class='fas fa-eye view'></i></a>
+                        <a [routerLink]="['editar/',produto.id]" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
+                            <i class="fa fa-edit edit"></i></a>
+                            <!-- <button type="button" class="btn" data-bs-toggle="modal"
                             [attr.data-bs-target]="'#exampleModal' + produto.id"><i
-                                class='fas fa-trash-alt delete'></i></button>
+                                class='fas fa-trash-alt delete' data-bs-toggle="tooltip" data-bs-placement="top" title="Remover"></i>
+                            </button> -->
                     </td>
                     <!-- Modal -->
                     <!-- Modals -->

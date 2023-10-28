@@ -13,7 +13,7 @@ import { UsuarioModule } from './usuario/usuario.module';
 import { VendasModule } from './produto/vendas/vendas.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorInterceptor } from './services/error.handler.service';
-
+import { NgxMaskDirective,NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 export const httpInterceptorProviders = [
   {
@@ -37,8 +37,11 @@ export const httpInterceptorProviders = [
     VendasModule,
     ToastrModule.forRoot(),
     HttpClientModule,
+    NgxMaskDirective,
+    NgxMaskPipe
+    
   ],
-  providers: [httpInterceptorProviders],
+  providers: [httpInterceptorProviders, provideNgxMask()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

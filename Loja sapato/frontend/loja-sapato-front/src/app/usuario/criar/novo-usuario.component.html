@@ -1,5 +1,5 @@
 
-<div class="container-bd">
+<div class="container-bd" style="margin-left: -18%;margin-top: 2%; margin-bottom: 10%;">
     <div class="container">
         <div class="forms">
             <a [routerLink]="['/admin/usuarios']" ><i class="fa-solid fa-backward icon back" data-bs-toggle="tooltip" data-bs-placement="top" title="Voltar"></i>
@@ -44,7 +44,7 @@
                         <i class="fa-solid fa-id-card icon"></i>
                     </div>
                     <div class="input-field"  [ngClass]="{'input-invalid': isInputInvalid('cpf'),'input-valid': isInputValid('cpf')}">
-                        <input type="text" placeholder="Insira o cpf" formControlName="cpf" />
+                        <input type="text" mask="CPF_CNPJ"  placeholder="Insira o cpf" formControlName="cpf" />
                         <span class="text-danger" *ngIf="isInputInvalid('cpf')">
                             <p>Preencha o campo cpf</p>
                         </span>

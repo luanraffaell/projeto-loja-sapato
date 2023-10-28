@@ -11,7 +11,7 @@ import { ListarUsuarioComponent } from './listar/listar-usuario.component';
 import { UsuarioService } from './service/usuario.service';
 import { UsuarioSenhaComponent } from './senha/usuario-senha/usuario-senha.component';
 import { EditarSenhaComponent } from './senha/editar-senha/editar-senha.component';
-
+import { NgxMaskDirective,NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 
 @NgModule({
@@ -28,7 +28,9 @@ import { EditarSenhaComponent } from './senha/editar-senha/editar-senha.componen
     UsuarioRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxMaskDirective,
+    NgxMaskPipe
   ],
   exports:[
     NovoUsuarioComponent,
@@ -36,7 +38,8 @@ import { EditarSenhaComponent } from './senha/editar-senha/editar-senha.componen
     EditarUsuarioComponent,
     ListarUsuarioComponent,
     UsuarioSenhaComponent,
-    EditarSenhaComponent
+    EditarSenhaComponent,
+   
   ],
   providers:[
     UsuarioService

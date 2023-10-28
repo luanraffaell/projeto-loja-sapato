@@ -1,4 +1,4 @@
-<div class="container main-container" style="margin-top: 10%; margin-left: 5px;">
+<div class="container main-container" style="margin-top: 10%; margin-left: 5px; margin-bottom: 10%;">
   <div class="container">
 
     <div class="table-title">
@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="col-md-6 mx-auto" style="margin-bottom: 7px;">
-        <input type="text" class="form-control" placeholder="Pesquisar usuario" [formControl]="queryField">
+        <input type="text" class="form-control" [placeholder]="getPlaceholder()" [formControl]="queryField">
 
         <div class="row mx-auto" style="margin-top: 3px;">
           <div class="form-check col-4 "style="padding-left: 30%;">
@@ -66,10 +66,12 @@
           </td>
           <td>ATIVO</td>
           <td>
-            <a [routerLink]="[usuario.id]" class="btn"><i class='fas fa-eye view'></i></a>
-            <a [routerLink]="['editar/',usuario.id]" class="btn"><i class="fa fa-edit edit"></i></a>
+            <a [routerLink]="[usuario.id]" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Visualizar">
+              <i class='fas fa-eye view'></i></a>
+            <a [routerLink]="['editar/',usuario.id]" class="btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar">
+              <i class="fa fa-edit edit"></i></a>
             <button type="button" class="btn" data-bs-toggle="modal"
-              [attr.data-bs-target]="'#exampleModal' + usuario.id"><i class='fas fa-trash-alt delete'></i></button>
+              [attr.data-bs-target]="'#exampleModal' + usuario.id"><i class='fas fa-trash-alt delete' data-bs-toggle="tooltip" data-bs-placement="top" title="Remover"></i></button>
           </td>
         </tr>
       </tbody>

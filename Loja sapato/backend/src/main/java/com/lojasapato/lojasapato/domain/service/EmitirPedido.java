@@ -29,7 +29,7 @@ public class EmitirPedido {
         pedidoDTO.setVendedorId(usuario.getId());
         Pedido pedido = converterEValidarPedidoDTO(pedidoDTO);
         pedido.calcularValorTotal();
-        pedido.setStatusPedido(StatusPedido.CRIADO);
+        pedido.setStatusPedido(StatusPedido.PAGO);
         pedido = pedidoRepository.save(pedido);
         pedido.setProtocolo(this.gerarProtocolo(pedido.getId()));
         return new PedidoResponseDTO(pedidoRepository.save(pedido));

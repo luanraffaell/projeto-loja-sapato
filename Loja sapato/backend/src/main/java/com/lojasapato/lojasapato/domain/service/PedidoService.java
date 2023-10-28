@@ -22,17 +22,30 @@ public class PedidoService {
     private final PedidoRepository pedidoRepository;
     private final UsuarioService usuarioService;
     private final NotaFiscalPdf notaFiscalPdf;
-    public List<PedidoResponseDTO>listarPedidos(){
+    public List<PedidoResponseDTO>listarPedidos(String protocolo){
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Usuario usuario = this.usuarioService.findUsuarioByEmail(email);
         if(usuario.getTipoUsuario().equals(TipoUsuario.ADMIN)){
-            return this.pedidoRepository.findAll()
-                    .stream()
-                    .map(pedido -> new PedidoResponseDTO(pedido))
+            if(protocolo == null || protocolo.isEmpty()){
+                return this.pedidoRepository.findAll()
+                        .stream()
+                        .map(pedido -> new PedidoResponseDTO(pedido))
+                        .collect(Collectors.toList());
+            }
+            List<Pedido> pedidos = this.pedidoRepository.findByProtocoloContainingIgnoreCase(protocolo)
+                    .orElseThrow(() -> new EntidadeNaoEncontradaException("Pedido não encontrado"));
+            return pedidos.stream().map(p -> new PedidoResponseDTO(p)).collect(Collectors.toList());
+        }
+        if(protocolo == null || protocolo.isEmpty()) {
+            return this.pedidoRepository.findByVendedorId(usuario.getId())
+                    .stream().map(pedido -> new PedidoResponseDTO(pedido))
                     .collect(Collectors.toList());
         }
-        return this.pedidoRepository.findByVendedorId(usuario.getId())
-                .stream().map(pedido -> new PedidoResponseDTO(pedido))
+        List<Pedido> pedidos = this.pedidoRepository.findByProtocoloContainingIgnoreCase(protocolo)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Pedido não encontrado"));
+        return pedidos.stream()
+                .filter(p -> p.getId() == usuario.getId())
+                .map(pedido -> new PedidoResponseDTO(pedido))
                 .collect(Collectors.toList());
     }
     public PedidoResponseDTO buscarOuFalhar(Long id) {

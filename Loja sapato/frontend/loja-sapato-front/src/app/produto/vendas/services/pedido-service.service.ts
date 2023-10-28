@@ -18,6 +18,13 @@ export class PedidoServiceService extends BaseService {
     return this.http.get<any>(this.urlServiceV1 + 'pedidos',this.obterHeaderAuth())
         .pipe(catchError(this.serviceError))
   }
+  listarTodosPedidosPorProtocolo(protocolo:any): Observable<any>{ 
+    const params = { protocolo: protocolo };
+    let url = this.urlServiceV1 + 'pedidos';
+    url +=`?protocolo=${params.protocolo}`;
+    return this.http.get<any>(url, this.obterHeaderAuth())
+           .pipe(catchError(this.serviceError))
+  }
   buscarPedidoPorId(id:any): Observable<any>{
     return this.http.get<any>(this.urlServiceV1 + `pedidos/${id}`,this.obterHeaderAuth())
         .pipe(catchError(this.serviceError))

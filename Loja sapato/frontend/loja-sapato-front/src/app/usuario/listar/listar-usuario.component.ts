@@ -35,6 +35,10 @@ export class ListarUsuarioComponent implements OnInit {
   selecionarRadio(valor: number): void {
     this.escolhaRadio = valor;
   }
+  getPlaceholder(){
+    if(this.escolhaRadio ===2) return 'Pesquisar usuario por email';
+    return 'Pesquisar usuario por CPF'
+  }
 
   usuarioFactory(value:any): Observable<any>{
     if(this.escolhaRadio === 2){

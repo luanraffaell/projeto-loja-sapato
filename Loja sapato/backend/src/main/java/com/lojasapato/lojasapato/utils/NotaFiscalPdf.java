@@ -71,7 +71,8 @@ public class NotaFiscalPdf {
 
         for(ItemDTO item: pedido.getItems()){
             table.addCell(createCenterAlignedCell(String.valueOf(item.getProdutoDTO().getId())));
-            table.addCell(createCenterAlignedCell(String.valueOf(item.getProdutoDTO().getNome())));
+            table.addCell(createCenterAlignedCell(String.valueOf(item.getProdutoDTO().getNome()
+                    + " Cor:"+item.getCor()+ " Tam:"+item.getTamanho())));
             table.addCell(createCenterAlignedCell(String.valueOf(item.getQuantidade())));
             table.addCell(createCenterAlignedCell("R$"+String.valueOf(item.getPrecoUnitario())));
             table.addCell(createCenterAlignedCell("R$"+String.valueOf(item.getPrecoTotal())));

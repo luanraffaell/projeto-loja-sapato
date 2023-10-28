@@ -34,7 +34,7 @@ insert into tb_produto_cor_tamanho (cor_tamanho_id, produto_id) values (3,2);
 insert into tb_produto_cor_tamanho (cor_tamanho_id, produto_id) values (5,3);
 /*seed produtos*/
 
-insert into tb_usuario(nome,email,senha,cpf,tipo_usuario) values ('Cibele','cibele@gmail.com','$2a$12$WJjtl//n1mH34nyJB2a9A.ECCbbCj7QqAQnO2oN.kW4xfHw4J9wRW','0255222','ADMIN');
-insert into tb_usuario(nome,email,senha,cpf,tipo_usuario) values ('Luan','luan@gmail.com','$2a$12$WJjtl//n1mH34nyJB2a9A.ECCbbCj7QqAQnO2oN.kW4xfHw4J9wRW','2525252','ADMIN');
-insert into tb_usuario(nome,email,senha,cpf,tipo_usuario) values ('Teste ADMIN','admin@teste.com','$2a$12$WJjtl//n1mH34nyJB2a9A.ECCbbCj7QqAQnO2oN.kW4xfHw4J9wRW','2525252','ADMIN');
-insert into tb_usuario(nome,email,senha,cpf,tipo_usuario) values ('Teste VENDEDOR','vendedor@teste.com','$2a$12$WJjtl//n1mH34nyJB2a9A.ECCbbCj7QqAQnO2oN.kW4xfHw4J9wRW','2525252','VENDEDOR');
+insert into tb_usuario(nome,email,senha,cpf,tipo_usuario) values ('Cibele','cibele@gmail.com','$2a$12$WJjtl//n1mH34nyJB2a9A.ECCbbCj7QqAQnO2oN.kW4xfHw4J9wRW','63239382350','ADMIN');
+insert into tb_usuario(nome,email,senha,cpf,tipo_usuario) values ('Luan','luan@gmail.com','$2a$12$WJjtl//n1mH34nyJB2a9A.ECCbbCj7QqAQnO2oN.kW4xfHw4J9wRW','02844461735','ADMIN');
+insert into tb_usuario(nome,email,senha,cpf,tipo_usuario) values ('Teste ADMIN','admin@teste.com','$2a$12$WJjtl//n1mH34nyJB2a9A.ECCbbCj7QqAQnO2oN.kW4xfHw4J9wRW','77329285552','ADMIN');
+insert into tb_usuario(nome,email,senha,cpf,tipo_usuario) values ('Teste VENDEDOR','vendedor@teste.com','$2a$12$WJjtl//n1mH34nyJB2a9A.ECCbbCj7QqAQnO2oN.kW4xfHw4J9wRW','07787999217','VENDEDOR');
