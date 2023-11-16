@@ -1,0 +1,50 @@
+@import "../../../../node_modules/ngx-chips/core/styles/core/_core.scss";
+
+
+$foundation-primary: #198754;
+$foundation-primary-dark: darken($foundation-primary, 10%);
+$color-focused-default: #198754 !default;
+// this is the container's theme
+$foundation-theme: (
+    container-border-bottom: 1px solid $foundation-primary
+);
+
+// this is the tag's theme
+$foundation-tag-theme: (
+    background: $foundation-primary,
+    background-focused: #198754,
+   
+    background-active: $foundation-primary-dark,
+    background-hover:$color-focused-default,
+    color: #fff,
+    color-hover: #fff,
+    border-radius: 2px,
+);
+
+// this is the delete icon's theme
+$foundation-icon-theme: (
+    fill: #fff,
+    fill-focus: #eee,
+    transition: all 0.35s
+);
+
+// apply theme to the container
+::ng-deep tag-input .ng2-tag-input.foundation-theme {
+    @include tag-input-theme($foundation-theme);
+    padding-left: 25px;
+}
+
+// apply theme to the tags
+::ng-deep tag-input .ng2-tag-input.foundation-theme tag {
+    @include tag-theme($foundation-tag-theme);
+    
+}
+
+// apply theme to the delete icon
+::ng-deep tag-input .ng2-tag-input.foundation-theme tag delete-icon {
+    @include icon-theme($foundation-icon-theme);
+    margin-bottom: 0;
+}
+::ng-deep tag-input .ng2-tag-input.foundation-theme:hover {
+    fill: #198754; // Defina a cor desejada para o hover do botão
+}

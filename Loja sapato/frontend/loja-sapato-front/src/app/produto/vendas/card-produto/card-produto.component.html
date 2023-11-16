@@ -1,0 +1,42 @@
+<div class="card">
+  <img class="card-img" [src]="imagemSelecionada" (change)="selecionarCor()" [style.height.px]="250" alt="Vans">
+
+  <div class="card-img-overlay d-flex justify-content-end">
+    <a href="#" class="card-link text-danger like">
+      <i class="fas fa-heart"></i>
+    </a>
+  </div>
+  <div class="card-body">
+    <h4 class="card-title">{{produto.nome}}</h4>
+    <h6 class="card-subtitle mb-2 text-muted">Categoria: sport</h6>
+    <p class="card-text">
+      {{produto.descricao}}
+    </p>
+    <div class="d-flex flex-fill" *ngIf="produto.ativo">
+      <select class="form-select" [(ngModel)]="corSelecionada" (change)="selecionarCor()"
+        aria-label="Selecione uma cor">
+        <option disabled selected>Selecione uma cor</option>
+        <option *ngFor="let cor of produto.corTamanho" [value]="cor.cor">{{ cor.cor }}</option>
+      </select>
+
+      <select class="form-select" *ngFor="let cor of produto.corTamanho" [hidden]="cor.cor !== corSelecionada"
+        [(ngModel)]="tamanhoSelecionado">
+        <option selected *ngFor="let tamanho of cor.tamanhos" [value]="tamanho">{{ tamanho }}</option>
+      </select>
+    </div>
+    <div class="buy d-flex justify-content-between align-items-center"  *ngIf="produto.ativo">
+      <div class="price text-success">
+        <h5 class="mt-4">{{produto.preco | currency:'BRL'}}</h5>
+      </div>
+      <button class="btn btn-success mt-3 custom-button" (click)="adicionarProdutoAoCarrinho(produto)"
+        data-toggle="button" aria-pressed="false"><i class="fas fa-shopping-cart"></i> Adicionar</button>
+    </div>
+    <button class="btn btn-dark detalhe" [routerLink]="['/vendas/produto', produto.id]"  *ngIf="produto.ativo">
+      Detalhe
+    </button>
+    <button class="btn btn-dark detalhe indisponivel"  *ngIf="!produto.ativo">
+      INDISPONIVEL
+    </button>
+  </div>
+
+</div>
